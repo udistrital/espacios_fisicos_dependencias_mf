@@ -5,7 +5,11 @@
   "projects": {
     "espacios-fisicos-mf": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -13,13 +17,14 @@
         "build": {
           "builder": "@angular-builders/custom-webpack:browser",
           "options": {
-            "outputPath": "dist/espacios-fisicos-mf",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.single-spa.ts",
             "polyfills": [
               "zone.js"
             ],
             "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "css",
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -32,8 +37,7 @@
               "path": "extra-webpack.config.js",
               "libraryName": "espacios-fisicos-mf",
               "libraryTarget": "umd"
-            },
-            "deployUrl": "http://localhost:4204/"
+            }
           },
           "configurations": {
             "production": {
@@ -50,7 +54,7 @@
                   "with": "src/environments/environment.production.ts"
                 }
               ],
-              "deployUrl": "http://localhost:4204"
+              "deployUrl": "https://oikosgestiondependencias.portaloas.udistrital.edu.co/"
             },
             "development": {
               "optimization": true,
@@ -66,7 +70,7 @@
                   "with": "src/environments/environment.development.ts"
                 }
               ],
-              "deployUrl": "http://localhost:4204"
+              "deployUrl": "https://pruebasoikosgestiondependencias.portaloas.udistrital.edu.co/"
             },
             "local": {
               "buildOptimizer": false,
@@ -110,6 +114,7 @@
               "zone.js/testing"
             ],
             "tsConfig": "tsconfig.spec.json",
+            "inlineStyleLanguage": "css",
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -124,6 +129,6 @@
     }
   },
   "cli": {
-    "analytics": "0349aa5b-0413-4635-bc8e-916ee23859ae"
+    "analytics": false
   }
 }
