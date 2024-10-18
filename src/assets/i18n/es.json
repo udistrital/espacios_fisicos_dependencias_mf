@@ -1,0 +1,124 @@
+{
+    "GESTION": {
+      "TITULO": "GESTIÓN DEPENDENCIAS",
+      "SUBTITULO": "BUSCAR DEPENDENCIAS",
+      "ORGANIGRAMA": "VER ORGANIGRAMAS"
+    },
+    "EDITAR":{
+        "TITULO": "EDITAR DEPENDENCIA"
+    },
+    "REGISTRAR":{
+      "TITULO":"REGISTRO ESPACIOS FÍSICOS"
+    },
+    "TOOLTIP": {
+      "NOMBRE_ESPACIO": {
+        "PARTE_1": "• El nombre del espacio físico debe ir en mayúsculas.",
+        "PARTE_2": "Ejemplo:",
+        "PARTE_3": "MODULO DE INVESTIGACION ",
+        "PARTE_4": "modulo de investigacion ❌"
+      },
+      "DEPENDENCIA_PADRE":{
+        "PARTE_1": "• Tener en cuenta que un espacio físico solo tiene",
+        "PARTE_2": "  una dependencia padre"
+      },
+      "CAMPOS":{
+        "PARTE_1": "• formulario de ingreso de campos, en esta parte puede",
+        "PARTE_2": "  ingresar tantos campos como considere con respecto al",
+        "PARTE_3": "  espacio físico, ejemplo:",
+        "PARTE_4": "  nombre: metraje",
+        "PARTE_5": "  Descripción: Dimensiones del espacio",
+        "PARTE_6": "  Código de abreviación: MET01"
+      },
+      "FACULTAD": {
+        "PARTE_1": "• El nombre de la Facultad debe ir en mayúsculas.",
+        "PARTE_2": "• Sin tildes."
+      },
+      "VICERRECTORIA": {
+        "PARTE_1": "• El nombre de la Vicerrectoría debe ir en mayúsculas.",
+        "PARTE_2": "• Sin tildes."
+      },
+      "ACCIONES":{
+        "EDITAR":"Editar Dependencia",
+        "ACTIVAR":"Activar Dependencia",
+        "DESACTIVAR":"Desactivar Dependencia"
+      }
+    },
+    "FORMULARIO": {
+      "NOMBRE_ESPACIO": "NOMBRE ESPACIO FÍSICO",
+      "DESCRIPCION": "DESCRIPCIÓN",
+      "CODIGO_ABREVIACION": "CÓDIGO ABREVIACIÓN",
+      "TIPO_ESPACIO": "TIPO ESPACIO FÍSICO",
+      "TIPO_USO": "TIPO DE USO",
+      "DEPENDENCIA_PADRE": "DEPENDENCIA PADRE",
+      "TIPO_EDIFICACION": "TIPO EDIFICACIÓN",
+      "TIPO_TERRENO": "TIPO TERRENO",
+      "NOMBRE_CAMPO": "NOMBRE CAMPO",
+      "REGISTRAR_ESPACIO": "REGISTRAR ESPACIO FÍSICO",
+      "AGREGAR_NUEVO_CAMPO": "AGREGAR NUEVO CAMPO",
+      "CAMPOS":"CAMPOS"
+    },
+    "EXITO": {
+        "BUSQUEDA": "Datos cargados con éxito",
+        "EDITAR": "Dependencia editada",
+        "REGISTRAR":"Dependencia creada",
+        "ACTIVAR":"Dependencia activada",
+        "DESACTIVAR":"Dependencia desactivada"
+    },
+    "ERROR":{
+        "BUSQUEDA":{
+            "DATOS":"Error al buscar dependencias: Datos no disponibles",
+            "BUSQUEDA":"Error al buscar dependencias: "
+        },
+        "DESCONOCIDO":"Error desconocido",
+        "EDITAR": "Error al editar la dependencia",
+        "ORGANIGRAMA":"Error al cargar los datos del organigrama",
+        "REGISTRAR":"Error al crear la dependencia",
+        "ACTIVAR":"Error al activar la dependencia",
+        "DESACTIVAR":"Error al desactivar la dependencia"
+    },
+    "ACCIONES": {
+      "EDITAR": "edit",
+      "ACEPTAR": "check",
+      "CANCELAR": "close",
+      "ELIMINAR": "delete"
+    },
+    "CARGA":{
+      "REGISTRO":"Creando Dependencia...",
+      "BUSQUEDA":"Obteniendo datos...",
+      "ACTIVAR":"Activando Dependencia...",
+      "DESACTIVAR":"Desactivando Dependencia...",
+      "EDITAR":"Editando datos..."
+    },
+    "CONFIRMACION":{
+      "ACTIVAR":{
+        "PREGUNTA":"¿Desea activar la dependencia?",
+        "CONFIRMAR":"ACTIVAR",
+        "DENEGAR":"NO ACTIVAR"
+      },
+      "DESACTIVAR":{
+        "PREGUNTA":"¿Desea desactivar la dependencia?",
+        "CONFIRMAR":"DESACTIVAR",
+        "DENEGAR":"NO DESACTIVAR"
+      },
+      "EDITAR":{
+        "PREGUNTA":"¿Desea editar la dependencia?",
+        "CONFIRMAR":"EDITAR",
+        "DENEGAR":"NO EDITAR"
+      },
+      "CANCELAR":"CANCELAR",
+      "DENEGACION":"Los cambios no fueron guardados"
+    },
+    "POP_UP":{
+      "ICONO":{
+        "ERROR":"error",
+        "INFO":"info",
+        "EXITO":"success"
+      },
+      "TITULO":{
+        "EXITO":"Operación exitosa",
+        "ERROR":"Error"
+      },
+      "CONFIRMACION":"Aceptar"
+    }
+  }
+  
