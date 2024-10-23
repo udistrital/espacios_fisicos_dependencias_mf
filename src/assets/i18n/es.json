@@ -1,11 +1,13 @@
 {
     "GESTION": {
-      "TITULO": "GESTIÓN DEPENDENCIAS",
-      "SUBTITULO": "BUSCAR DEPENDENCIAS",
-      "ORGANIGRAMA": "VER ORGANIGRAMAS"
+      "TITULO": "GESTIÓN ESPACIOS FÍSICOS",
+      "SUBTITULO": "BUSCAR ESPACIO FÍSICO",
+      "ESPACIO_FISICO": "ESPACIO FÍSICO"
     },
-    "EDITAR":{
-        "TITULO": "EDITAR DEPENDENCIA"
+    "HISTORICO":{
+      "TITULO": "HISTÓRICOS ESPACIOS FÍSICOS",
+      "SUBTITULO": "BUSCAR ESPACIO FÍSICO",
+      "ACLARACION": "* Información de espacios físicos a travez de los años"
     },
     "REGISTRAR":{
       "TITULO":"REGISTRO ESPACIOS FÍSICOS"
@@ -38,9 +40,13 @@
         "PARTE_2": "• Sin tildes."
       },
       "ACCIONES":{
-        "EDITAR":"Editar Dependencia",
-        "ACTIVAR":"Activar Dependencia",
-        "DESACTIVAR":"Desactivar Dependencia"
+        "EDITAR": "Editar Espacio",
+        "ACTIVAR": "Activar Espacio",
+        "DESACTIVAR": "Desactivar Espacio",
+        "DETALLES": "Ver Detalles"
+      },
+      "ANIO":{
+        "PARTE_1": "• Espacio para colocar los años, se pueden colocar varios años."
       }
     },
     "FORMULARIO": {
@@ -50,12 +56,35 @@
       "TIPO_ESPACIO": "TIPO ESPACIO FÍSICO",
       "TIPO_USO": "TIPO DE USO",
       "DEPENDENCIA_PADRE": "DEPENDENCIA PADRE",
+      "DEPENDENCIA": "DEPENDENCIA",
       "TIPO_EDIFICACION": "TIPO EDIFICACIÓN",
       "TIPO_TERRENO": "TIPO TERRENO",
       "NOMBRE_CAMPO": "NOMBRE CAMPO",
       "REGISTRAR_ESPACIO": "REGISTRAR ESPACIO FÍSICO",
       "AGREGAR_NUEVO_CAMPO": "AGREGAR NUEVO CAMPO",
-      "CAMPOS":"CAMPOS"
+      "CAMPOS": "CAMPOS",
+      "ESTADO": "ESTADO",
+      "BUSCAR": "BUSCAR",
+      "OBSERVACIONES": "OBSERVACIONES",
+      "EDITAR": "EDITAR ESPACIO FÍSICO",
+      "ANIO": "AÑO ESPACIO FÍSICO"
+    },
+    "TABLA_GESTION":{
+      "NOMBRE":"NOMBRE",
+      "CODIGO_ABREVIACION":"COD_ABREVIACIÓN",
+      "DESCRIPCION":"DESCRIPCIÓN",
+      "ESTADO":"ESTADO",
+      "TIPO_ESPACIO":"TIPO ESPACIO FÍSICO",
+      "TIPO_USO":"TIPO USO",
+      "ACCIONES":"ACCIONES"
+    },
+    "TABLA_HISTORICO":{
+      "NOMBRE":"NOMBRE",
+      "CODIGO_ABREVIACION":"COD_ABREVIACIÓN",
+      "TIPO_ESPACIO":"TIPO ESPACIO FÍSICO",
+      "TIPO_USO":"TIPO USO",
+      "DEPENDENCIA_ASOCIADA":"DEPENDENCIA ASOCIADA",
+      "OBSERVACIONES":"OBSERVACIONES"
     },
     "EXITO": {
         "BUSQUEDA": "Datos cargados con éxito",
@@ -80,7 +109,9 @@
       "EDITAR": "edit",
       "ACEPTAR": "check",
       "CANCELAR": "close",
-      "ELIMINAR": "delete"
+      "ELIMINAR": "delete",
+      "VISTA": "visibility",
+      "EDITAR2": "edit_note"
     },
     "CARGA":{
       "REGISTRO":"Creando Dependencia...",

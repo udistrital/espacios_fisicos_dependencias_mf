@@ -18,6 +18,11 @@ import { OikosMidService } from './services/oikos_mid.service';
 import { TranslateLoader, TranslateModule, TranslateService, TranslateStore } from '@ngx-translate/core';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { GestionEspaciosComponent } from './pages/gestion-espacios/gestion-espacios.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { EditarEspacioDialogComponent } from './pages/gestion-espacios/components/editar-espacio-dialog/editar-espacio-dialog.component';
+import { HistoricoEspaciosComponent } from './pages/historico-espacios/historico-espacios.component';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -26,7 +31,10 @@ export function createTranslateLoader(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
-    RegistroEspaciosComponent
+    RegistroEspaciosComponent,
+    GestionEspaciosComponent,
+    EditarEspacioDialogComponent,
+    HistoricoEspaciosComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +49,8 @@ export function createTranslateLoader(http: HttpClient) {
     CommonModule,
     MatDialogModule,
     MatIconModule,
+    MatPaginatorModule,
+    MatTableModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

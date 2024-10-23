@@ -1,11 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { OikosService } from '../../services/oikos.service';
-import { OikosMidService } from '../../services/oikos_mid.service';
 import { PopUpManager } from '../../managers/popUpManager';
 import { FormControl, FormGroup, Validators, FormArray  } from '@angular/forms';
 import { Desplegables } from 'src/app/models/desplegables.models';
 import { MatDialogRef } from '@angular/material/dialog';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
+import { Campo } from 'src/app/models/campo.models';
 // @ts-ignore
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 
@@ -22,8 +21,7 @@ export class RegistroEspaciosComponent implements OnInit {
   dependenciasAsociadas: Desplegables[] = [];
   registroForm!: FormGroup;
 
-  // Array para almacenar los campos dinámicos
-  campos: Array<{ nombreCampo: string; descripcion: string; codigoAbreviacion: string }> = [];
+  campos: Array<Campo> = [];
 
   constructor(
     private popUpManager: PopUpManager,

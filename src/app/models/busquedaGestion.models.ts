@@ -1,11 +1,16 @@
-import { Desplegables } from "./desplegables.models";
+import { Campo } from "./campo.models";
 
 export interface BusquedaGestion {
     id: number;
     nombre: string;
-    telefono: string;
-    correo: string;
-    dependenciasAsociadas: Desplegables;
-    tipoDependencia: Desplegables[];
+    cod_abreviacion: string;
+    descripcion: string;
     estado: string;
+    tipoEspacio: string;
+    tipoUso: string;
+    tipoEdificacion: string;
+    tipoTerreno: string;
+    dependenciaPadre: string;
+    campos: Campo[];
+    observaciones: string;
 }

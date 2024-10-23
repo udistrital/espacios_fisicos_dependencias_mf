@@ -39,11 +39,6 @@ input, mat-select, select {
     align-self: center;
 }
 
-.contenedor-horizontal {
-    display: flex;
-    align-items: center;
-    gap: 14px; 
-}
 
 .contenedor-input-boton {
     display: flex;
@@ -51,19 +46,6 @@ input, mat-select, select {
     gap: 42px;
 }
 
-.contenedor-horizontal-campos {
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
-    padding: 0 16px;
-}
-
-.campo {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin: 0 10px;
-}
 
 .boton-ayuda.nuevo-campo {
     padding: 8px 12px;

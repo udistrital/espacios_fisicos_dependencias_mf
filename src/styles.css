@@ -63,6 +63,26 @@
     flex-direction: column;
 }
 
+.contenedor-horizontal {
+    display: flex;
+    align-items: center;
+    gap: 14px; 
+}
+
+.contenedor-horizontal-campos {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 0 16px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0 10px;
+}
+
 .tooltip {
     font-family: Helvetica;
     width: max-content;

@@ -1,0 +1,160 @@
+
+<mat-card>
+    <div class="contenido-editar">
+        <mat-card-title class="titulo"> {{tipo}} {{ "GESTION.ESPACIO_FISICO" | translate }}</mat-card-title> 
+        <button class="boton-salir" (click)="onCloseClick()">x</button>
+    </div>
+    <mat-divider class="divider"></mat-divider>
+    <mat-card-content>
+        <form [formGroup]="editarForm">
+            <div class="grid">
+                <div class="left-column">
+                    <p class="nombre-input">{{ "FORMULARIO.NOMBRE_ESPACIO" | translate }} 
+                        <button class="boton-ayuda">?   
+                            <span class="tooltip tooltip-right">
+                                <p>{{ "TOOLTIP.NOMBRE_ESPACIO.PARTE_1" | translate }}</p>
+                                <br>
+                                <p>{{ "TOOLTIP.NOMBRE_ESPACIO.PARTE_2" | translate }}</p>
+                                <p>{{ "TOOLTIP.NOMBRE_ESPACIO.PARTE_3" | translate }}</p>
+                                <p>{{ "TOOLTIP.NOMBRE_ESPACIO.PARTE_4" | translate }}</p>
+                            </span>
+                        </button> 
+                    </p>
+                    <input type="text" formControlName="nombre" [readonly]="tipo === 'DETALLES'">
+                    <div class="error" *ngIf="editarForm.get('nombre')?.invalid">
+                        {{ "* Campo obligatorio" | translate }}
+                    </div>
+                    <br> 
+                    <br>
+                    <br>    
+                    <p class="nombre-input">{{ "FORMULARIO.CODIGO_ABREVIACION" | translate }}</p>
+                    <input type="text" formControlName="codigo_abreviacion"  [readonly]="tipo === 'DETALLES'">
+                    <div class="error" *ngIf="editarForm.get('codigo_abreviacion')?.errors?.['required']">
+                        {{ "* Campo obligatorio" | translate }}
+                    </div>
+                    <p class="nombre-input">{{ "FORMULARIO.DEPENDENCIA_PADRE" | translate }}
+                        <button class="boton-ayuda">?   
+                            <span class="tooltip tooltip-right">
+                                <p>{{ "TOOLTIP.DEPENDENCIA_PADRE.PARTE_1" | translate }}</p>
+                                <p>{{ "TOOLTIP.DEPENDENCIA_PADRE.PARTE_2" | translate }}</p>
+                            </span>
+                        </button> 
+                    </p>
+                    <input type="text" formControlName="dependencia_padre"  [readonly]="tipo === 'DETALLES'">
+                    <div class="error" *ngIf="editarForm.get('dependencia_padre')?.errors?.['required'] ">
+                        {{ "* Campo obligatorio" | translate }}
+                    </div>     
+                    <br>
+                    <br> 
+                    <button class="boton-accion" [disabled]="!editarForm.valid"
+                            [ngClass]="{'btn-disabled': !editarForm.valid, 'btn-enabled': editarForm.valid}" *ngIf="tipo === 'EDITAR'" >
+                        {{ "FORMULARIO.EDITAR" | translate }}
+                    </button>   
+                    <br> 
+                    <br>
+                    <br>              
+                    <div class="contenedor-horizontal">
+                        <button class="boton-ayuda nuevo-campo">?   
+                            <span class="tooltip tooltip-right">
+                                <p>{{ "TOOLTIP.CAMPOS.PARTE_1" | translate }}</p>
+                                <p>{{ "TOOLTIP.CAMPOS.PARTE_2" | translate }}</p>
+                                <p>{{ "TOOLTIP.CAMPOS.PARTE_3" | translate }}</p>
+                                <br>
+                                <p>{{ "TOOLTIP.CAMPOS.PARTE_4" | translate }}</p>
+                                <p>{{ "TOOLTIP.CAMPOS.PARTE_5" | translate }}</p>
+                                <p>{{ "TOOLTIP.CAMPOS.PARTE_6" | translate }}</p>
+                            </span>
+                        </button>
+                    
+                        <div class="contenedor-input-boton">
+                            <p class="nombre-input">{{ "FORMULARIO.CAMPOS" | translate }}</p>
+                            <button class="boton-nuevo-campo" *ngIf="tipo === 'EDITAR'" (click)="agregarCampo()">
+                                {{ "FORMULARIO.AGREGAR_NUEVO_CAMPO" | translate }}
+                            </button>
+                        </div>
+                    </div>                                                                     
+                </div>
+                <div class="right-column">
+                    <p class="nombre-input">{{ "FORMULARIO.DESCRIPCION" | translate }}</p>
+                    <textarea formControlName="descripcion" rows="4" class="descripcion-input"  [readonly]="tipo === 'DETALLES'"></textarea>
+                    <div class="error" *ngIf="editarForm.get('descripcion')?.invalid">
+                        {{ "* Campo obligatorio" | translate }}
+                    </div>
+                    <div class="columns-container">
+                        <div class="column">
+                            <p class="nombre-input">{{ "FORMULARIO.TIPO_ESPACIO" | translate }}</p>
+                            <input type="text" formControlName="tipo_espacio_fisico"  [readonly]="tipo === 'DETALLES'">
+                            <div class="error" *ngIf="editarForm.get('tipo_espacio_fisico')?.errors?.['required'] ">
+                                {{ "* Campo obligatorio" | translate }}
+                            </div>
+                            <p class="nombre-input">{{ "FORMULARIO.TIPO_EDIFICACION" | translate }}</p>
+                            <input type="text" formControlName="tipo_edificacion"  [readonly]="tipo === 'DETALLES'">
+                            <div class="error" *ngIf="editarForm.get('tipo_edificacion')?.errors?.['required'] ">
+                                {{ "* Campo obligatorio" | translate }}
+                            </div>
+                        </div>
+                        <div class="column">
+                            <p class="nombre-input">{{ "FORMULARIO.TIPO_USO" | translate }}</p>
+                            <input type="text" formControlName="tipo_uso"  [readonly]="tipo === 'DETALLES'">
+                            <div class="error" *ngIf="editarForm.get('tipo_uso')?.errors?.['required'] ">
+                                {{ "* Campo obligatorio" | translate }}
+                            </div>
+                            <p class="nombre-input">{{ "FORMULARIO.TIPO_TERRENO" | translate }}</p>
+                            <input type="text" formControlName="tipo_terreno"  [readonly]="tipo === 'DETALLES'">
+                            <div class="error" *ngIf="editarForm.get('tipo_terreno')?.errors?.['required'] ">
+                                {{ "* Campo obligatorio" | translate }}
+                            </div>
+                        </div>
+                    </div>
+                    <p class="nombre-input">{{ "FORMULARIO.OBSERVACIONES" | translate }}</p>
+                    <textarea formControlName="observaciones" rows="4" class="descripcion-input"  [readonly]="tipo === 'DETALLES'"></textarea>
+                    <div class="error" *ngIf="editarForm.get('observaciones')?.invalid">
+                        {{ "* Campo obligatorio" | translate }}
+                    </div>
+                </div>                               
+            
+            </div>
+            <br>
+            <div formArrayName="camposDinamicos">
+                <div *ngFor="let campo of camposDinamicos.controls; let i = index" [formGroupName]="i">
+                    <div class="contenedor-horizontal-campos"
+                    [ngClass]="{'alineacion-numeral': tipo !== 'EDITAR'}">
+                        <div class="campo campo-numeral" *ngIf="tipo === 'EDITAR'">
+                            <p class="numeral-campo">{{ i + 1 }}</p>
+                            <div class="boton-acciones">
+                                <mat-icon class="icono-rojo" (click)="eliminarCampo(i)">{{ "ACCIONES.ELIMINAR" | translate }}</mat-icon>
+                            </div>
+                        </div>
+                        <div class="campo campo-numeral" *ngIf="tipo !== 'EDITAR'">
+                            <p class="numeral-campo">{{ i + 1 }}</p>
+                        </div>
+                        <div class="campo nombre-campo">
+                            <p class="nombre-input">{{ "FORMULARIO.NOMBRE_CAMPO" | translate }}</p>
+                            <input type="text" formControlName="nombre_campo"  [readonly]="tipo === 'DETALLES'">
+                            <div class="error" *ngIf="campo.get('nombre_campo')?.errors?.['required']"> 
+                                {{ "* Campo obligatorio" | translate }}
+                            </div>
+                        </div>
+                        <div class="campo descripcion-campo">
+                            <p class="nombre-input">{{ "FORMULARIO.DESCRIPCION" | translate }}</p>
+                            <input type="text" formControlName="descripcion"  [readonly]="tipo === 'DETALLES'">
+                            <div class="error" *ngIf="campo.get('descripcion')?.errors?.['required']">
+                                {{ "* Campo obligatorio" | translate }}
+                            </div>
+                        </div>
+                        <div class="campo codigo-abreviacion-campo">
+                            <p class="nombre-input">{{ "FORMULARIO.CODIGO_ABREVIACION" | translate }}</p>
+                            <input type="text" formControlName="codigo_abreviacion"  [readonly]="tipo === 'DETALLES'">
+                            <div class="error" *ngIf="campo.get('codigo_abreviacion')?.errors?.['required']">
+                                {{ "* Campo obligatorio" | translate }}
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <mat-divider class="divider-campo"></mat-divider>    
+                    <br>
+                </div>
+            </div>  
+        </form>
+    </mat-card-content>
+</mat-card>
