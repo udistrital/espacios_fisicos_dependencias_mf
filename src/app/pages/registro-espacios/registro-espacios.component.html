@@ -37,7 +37,12 @@
                                             </span>
                                         </button> 
                                     </p>
-                                    <input type="text" formControlName="dependencia_padre">
+                                    <select formControlName="dependencia_padre">
+                                        <option> ... </option>
+                                        <option *ngFor="let item of dependencia_padre" [ngValue]="item">
+                                            {{item.nombre}}
+                                        </option>
+                                    </select>
                                     <div class="error" *ngIf="registroForm.get('dependencia_padre')?.errors?.['required'] ">
                                         {{ "* Campo obligatorio" | translate }}
                                     </div>                       
@@ -71,30 +76,34 @@
                                     <div class="columns-container">
                                         <div class="column">
                                             <p class="nombre-input">{{ "FORMULARIO.TIPO_ESPACIO" | translate }}</p>
-                                            <input type="text" formControlName="tipo_espacio_fisico">
+                                            <select  formControlName="tipo_espacio_fisico">
+                                                <option> ... </option>
+                                                <option *ngFor="let item of tipo_espacio_fisico" [ngValue]="item">
+                                                    {{item.nombre}}
+                                                </option>
+                                            </select>
                                             <div class="error" *ngIf="registroForm.get('tipo_espacio_fisico')?.errors?.['required'] ">
                                                 {{ "* Campo obligatorio" | translate }}
                                             </div>
                                             <p class="nombre-input">{{ "FORMULARIO.TIPO_EDIFICACION" | translate }}</p>
-                                            <input type="text" formControlName="tipo_edificacion">
-                                            <div class="error" *ngIf="registroForm.get('tipo_edificacion')?.errors?.['required'] ">
-                                                {{ "* Campo obligatorio" | translate }}
-                                            </div>
+                                            <input type="number" formControlName="tipo_edificacion">
                                         </div>
                                         <div class="column">
                                             <p class="nombre-input">{{ "FORMULARIO.TIPO_USO" | translate }}</p>
-                                            <input type="text" formControlName="tipo_uso">
+                                            <select formControlName="tipo_uso">
+                                                <option> ... </option>
+                                                <option *ngFor="let item of tipo_uso" [ngValue]="item">
+                                                    {{item.nombre}}
+                                                </option>
+                                            </select>
                                             <div class="error" *ngIf="registroForm.get('tipo_uso')?.errors?.['required'] ">
                                                 {{ "* Campo obligatorio" | translate }}
                                             </div>
                                             <p class="nombre-input">{{ "FORMULARIO.TIPO_TERRENO" | translate }}</p>
-                                            <input type="text" formControlName="tipo_terreno">
-                                            <div class="error" *ngIf="registroForm.get('tipo_terreno')?.errors?.['required'] ">
-                                                {{ "* Campo obligatorio" | translate }}
-                                            </div>
+                                            <input type="number" formControlName="tipo_terreno">
                                         </div>
                                     </div>
-                                    <button class="boton-accion" [disabled]="!registroForm.valid"
+                                    <button class="boton-accion" [disabled]="!registroForm.valid" (click)="enviarEspacioFisico()"
                                             [ngClass]="{'btn-disabled': !registroForm.valid, 'btn-enabled': registroForm.valid}">
                                         {{ "FORMULARIO.REGISTRAR_ESPACIO" | translate }}
                                     </button>

@@ -44,6 +44,7 @@ export class PopUpManager {
 
     showConfirmAlert(titulo: string, confirmar: string, denegar: string): Promise<boolean | null> {
         return Swal.fire({
+            confirmButtonColor: '#188c18',
             title: titulo,
             showDenyButton: true,
             showCancelButton: true,

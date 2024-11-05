@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms'
 import { MatSelectModule } from '@angular/material/select';
@@ -43,6 +44,7 @@ export function createTranslateLoader(http: HttpClient) {
     AppRoutingModule,
     MatCardModule,
     MatFormFieldModule,
+    MatSnackBarModule,
     MatDividerModule,
     MatSelectModule,
     ReactiveFormsModule,

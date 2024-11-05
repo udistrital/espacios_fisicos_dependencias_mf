@@ -89,7 +89,7 @@
     "EXITO": {
         "BUSQUEDA": "Datos cargados con éxito",
         "EDITAR": "Dependencia editada",
-        "REGISTRAR":"Dependencia creada",
+        "REGISTRAR":"Espacio Físico creado",
         "ACTIVAR":"Dependencia activada",
         "DESACTIVAR":"Dependencia desactivada"
     },
@@ -101,7 +101,7 @@
         "DESCONOCIDO":"Error desconocido",
         "EDITAR": "Error al editar la dependencia",
         "ORGANIGRAMA":"Error al cargar los datos del organigrama",
-        "REGISTRAR":"Error al crear la dependencia",
+        "REGISTRAR":"Error al crear el espacio físico",
         "ACTIVAR":"Error al activar la dependencia",
         "DESACTIVAR":"Error al desactivar la dependencia"
     },
@@ -114,13 +114,18 @@
       "EDITAR2": "edit_note"
     },
     "CARGA":{
-      "REGISTRO":"Creando Dependencia...",
+      "REGISTRO":"Creando Espacio Físico...",
       "BUSQUEDA":"Obteniendo datos...",
       "ACTIVAR":"Activando Dependencia...",
       "DESACTIVAR":"Desactivando Dependencia...",
       "EDITAR":"Editando datos..."
     },
     "CONFIRMACION":{
+      "REGISTRAR":{
+        "PREGUNTA":"¿Desea registrar el espacio físico?",
+        "CONFIRMAR":"REGISTRAR",
+        "DENEGAR":"NO REGISTRAR"
+      },
       "ACTIVAR":{
         "PREGUNTA":"¿Desea activar la dependencia?",
         "CONFIRMAR":"ACTIVAR",
