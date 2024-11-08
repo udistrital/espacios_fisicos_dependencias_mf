@@ -89,9 +89,6 @@
                             </div>
                             <p class="nombre-input">{{ "FORMULARIO.TIPO_EDIFICACION" | translate }}</p>
                             <input type="text" formControlName="tipo_edificacion"  [readonly]="tipo === 'DETALLES'">
-                            <div class="error" *ngIf="editarForm.get('tipo_edificacion')?.errors?.['required'] ">
-                                {{ "* Campo obligatorio" | translate }}
-                            </div>
                         </div>
                         <div class="column">
                             <p class="nombre-input">{{ "FORMULARIO.TIPO_USO" | translate }}</p>
@@ -101,9 +98,6 @@
                             </div>
                             <p class="nombre-input">{{ "FORMULARIO.TIPO_TERRENO" | translate }}</p>
                             <input type="text" formControlName="tipo_terreno"  [readonly]="tipo === 'DETALLES'">
-                            <div class="error" *ngIf="editarForm.get('tipo_terreno')?.errors?.['required'] ">
-                                {{ "* Campo obligatorio" | translate }}
-                            </div>
                         </div>
                     </div>
                     <p class="nombre-input">{{ "FORMULARIO.OBSERVACIONES" | translate }}</p>

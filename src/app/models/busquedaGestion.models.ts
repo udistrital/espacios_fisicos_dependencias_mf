@@ -1,4 +1,5 @@
 import { Campo } from "./campo.models";
+import { Desplegables } from "./desplegables.models";
 
 export interface BusquedaGestion {
     id: number;
@@ -6,11 +7,10 @@ export interface BusquedaGestion {
     cod_abreviacion: string;
     descripcion: string;
     estado: string;
-    tipoEspacio: string;
-    tipoUso: string;
+    tipoEspacio: Desplegables;
+    tipoUso: Desplegables;
     tipoEdificacion: string;
     tipoTerreno: string;
-    dependenciaPadre: string;
+    dependenciaPadre: Desplegables;
     campos: Campo[];
-    observaciones: string;
 }

@@ -80,12 +80,11 @@ export class EditarEspacioDialogComponent {
     this.editarForm.get('nombre')?.setValue(this.element.nombre);
     this.editarForm.get('codigo_abreviacion')?.setValue(this.element.cod_abreviacion);
     this.editarForm.get('descripcion')?.setValue(this.element.descripcion);
-    this.editarForm.get('tipo_espacio_fisico')?.setValue(this.element.tipoEspacio);
-    this.editarForm.get('tipo_uso')?.setValue(this.element.tipoUso);
+    // this.editarForm.get('dependencia_padre')?.setValue(this.element.dependenciaPadre.nombre);
+    this.editarForm.get('tipo_espacio_fisico')?.setValue(this.element.tipoEspacio.nombre);
+    this.editarForm.get('tipo_uso')?.setValue(this.element.tipoUso.nombre);
     this.editarForm.get('tipo_edificacion')?.setValue(this.element.tipoEdificacion);
     this.editarForm.get('tipo_terreno')?.setValue(this.element.tipoTerreno);
-    this.editarForm.get('dependencia_padre')?.setValue(this.element.dependenciaPadre);
-    this.editarForm.get('observaciones')?.setValue(this.element.observaciones);
     this.camposDinamicos.clear();
     console.log(this.element.campos)
     this.element.campos.forEach(campo => {

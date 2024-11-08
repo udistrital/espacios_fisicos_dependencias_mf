@@ -67,7 +67,11 @@
       "BUSCAR": "BUSCAR",
       "OBSERVACIONES": "OBSERVACIONES",
       "EDITAR": "EDITAR ESPACIO FÍSICO",
-      "ANIO": "AÑO ESPACIO FÍSICO"
+      "ANIO": "AÑO ESPACIO FÍSICO",
+      "ESTADO_OPCIONES": {
+        "ACTIVO": "ACTIVO",
+        "NO_ACTIVO": "NO ACTIVO"
+      }
     },
     "TABLA_GESTION":{
       "NOMBRE":"NOMBRE",
