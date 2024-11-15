@@ -1,0 +1,75 @@
+<mat-card>
+    <mat-card-content>
+      <mat-card>
+        <mat-card-title class="titulo">{{ "HISTORICO.TITULO" | translate }}</mat-card-title>
+        <mat-divider class="divider"></mat-divider>
+        <mat-card-content>
+          <mat-card>
+            <div class="contenido-gestion">
+              <mat-card-title class="titulo2 left">{{ "HISTORICO.SUBTITULO" | translate }}</mat-card-title>
+              <p class="right">{{ "HISTORICO.ACLARACION" | translate }}</p>
+            </div>
+            <mat-divider class="divider"></mat-divider>
+            <mat-card-content>
+              <form [formGroup]="historicoForm">
+                <div class="grid">
+                  <div class="left-column">
+                    <p class="nombre-input">{{ "FORMULARIO.ANIO" | translate }}<button class="boton-ayuda">?   
+                      <span class="tooltip tooltip-right">
+                          <p>{{ "TOOLTIP.ANIO.PARTE_1" | translate }}</p>
+                      </span>
+                  </button> </p>
+                    <mat-select formControlName="anio" multiple>
+                      <mat-option *ngFor="let item of anios()" [value]="item">
+                          {{ item }}
+                      </mat-option>
+                    </mat-select>
+                    
+                  </div>
+                  <div class="right-column">
+                    <br>
+                    <button class="boton-accion" (click)="buscarEspacios()">{{ "FORMULARIO.BUSCAR" | translate }}</button>                    
+                  </div>
+                </div>
+              </form>
+              <br>
+              <ng-container *ngIf="mostrarTabla">
+                <table mat-table [dataSource]="datos" class="mat-elevation-z8 tabla-gestion">
+                  <ng-container matColumnDef="NOMBRE">
+                    <th mat-header-cell *matHeaderCellDef class="titulo-tabla">{{ "TABLA_HISTORICO.NOMBRE" | translate }}</th>
+                    <td mat-cell *matCellDef="let element" class="contenido-celda">{{ element.nombre }}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="COD_ABREVIACIÓN">
+                    <th mat-header-cell *matHeaderCellDef class="titulo-tabla">{{ "TABLA_HISTORICO.CODIGO_ABREVIACION" | translate }}</th>
+                    <td mat-cell *matCellDef="let element" class="contenido-celda">
+                      {{ element.cod_abreviacion ?? 'NO REGISTRA' }}
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="TIPO ESPACIO FÍSICO">
+                    <th mat-header-cell *matHeaderCellDef class="titulo-tabla">{{ "TABLA_HISTORICO.TIPO_ESPACIO" | translate }}</th>
+                    <td mat-cell *matCellDef="let element" class="contenido-celda">{{ element.tipoEspacio }}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="TIPO USO">
+                    <th mat-header-cell *matHeaderCellDef class="titulo-tabla">{{ "TABLA_HISTORICO.TIPO_USO" | translate }}</th>
+                    <td mat-cell *matCellDef="let element" class="contenido-celda">{{ element.tipoUso }}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="DEPENDENCIA ASOCIADA">
+                    <th mat-header-cell *matHeaderCellDef class="titulo-tabla">{{ "TABLA_HISTORICO.DEPENDENCIA_ASOCIADA" | translate }}</th>
+                    <td mat-cell *matCellDef="let element" class="contenido-celda">{{ element.dependenciaAsociada }}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="OBSERVACIONES">
+                    <th mat-header-cell *matHeaderCellDef class="titulo-tabla">{{ "TABLA_HISTORICO.OBSERVACIONES" | translate }}</th>
+                    <td mat-cell *matCellDef="let element" class="contenido-celda">{{ element.observaciones }}</td>
+                  </ng-container>
+                  <tr mat-header-row class="titulo-tabla" *matHeaderRowDef="columnasBusqueda()"></tr>
+                  <tr mat-row *matRowDef="let row; columns: columnasBusqueda();"></tr>
+                </table>
+                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+              </ng-container>
+            </mat-card-content>
+          </mat-card>
+        </mat-card-content>
+      </mat-card>
+    </mat-card-content>
+  </mat-card>
+  

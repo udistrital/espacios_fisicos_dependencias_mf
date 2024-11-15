@@ -1,0 +1,172 @@
+
+.divider {
+    background-color: #8C1A18;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 3px;
+}
+
+.titulo {
+    color: #8C1A18;
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;   
+    font-family: Helvetica;
+}
+
+input, mat-select, select {
+    width: 100%;
+    margin-bottom: 25px; 
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid;
+    font-family: Helvetica;
+    padding-left: 5px;
+    margin-top: 3px;
+}
+
+.boton-nuevo-campo {
+    background-color: #731514;
+    color: #FFFFFF;
+    border: 1px solid #8C1A18; 
+    border-radius: 5px; 
+    cursor: pointer;
+    padding: 5px 8%;
+    white-space: nowrap;
+    align-self: center;
+}
+
+
+.contenedor-input-boton {
+    display: flex;
+    align-items: center;
+    gap: 42px;
+}
+
+
+.boton-ayuda.nuevo-campo {
+    padding: 8px 12px;
+}
+
+.descripcion-input {
+    width: 100%; 
+    height: auto; 
+    resize: vertical; 
+    overflow: auto; 
+    text-align: left; 
+    padding: 10px;
+    box-sizing: border-box;
+    height: 60px;
+}
+
+.left-column input[formControlName="nombre"] {
+    margin-bottom: 45px;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+    min-height: 16px; 
+    margin-top: -16px;
+}
+
+.mat-select-trigger, .mat-select-panel  {
+    font-size: 14px; 
+}
+
+.grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; 
+}
+
+.boton-accion {
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-enabled {
+    cursor: pointer;
+  }
+  
+  .btn-disabled {
+    background-color: #b3b3b3; 
+    cursor: not-allowed;
+  }
+
+.form-group {
+    position: relative;
+}
+
+.boton-ayuda {
+    font-size: 11px; 
+    padding: 1px 1px; 
+    height: auto; 
+    min-width: 10px; 
+    line-height: 0.8; 
+}
+
+.boton-ayuda-dos {
+    font-size: 11px; 
+    padding: 1px 1px; 
+    height: auto; 
+    min-width: 10px; 
+    line-height: 0.8; 
+    background: none; 
+    border: none; 
+}
+
+.boton-accion{
+    margin-left: 0px;
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+.icono-rojo{
+    color: #8C1A18;
+    font-weight: bold;
+    padding: 0;
+    min-width: auto;
+    width: auto;
+    height: auto;
+    cursor: pointer;
+}
+
+.campo-numeral {
+    display: flex;
+    flex-direction: column; /* Mantiene el numeral y el ícono uno encima del otro */
+    align-items: center; /* Centra el contenido horizontalmente */
+    width: auto; 
+    height: auto;
+}
+
+.numeral-campo {
+    font-size: 14px;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 25px;
+    height: 20px;
+    text-align: center;
+}
+
+.nombre-campo {
+    width: 40%; 
+}
+
+
+.descripcion-campo {
+    width: 60%; 
+}
+
+.codigo-abreviacion-campo {
+    width: 30%;
+}
+
+.divider-campo{
+    background-color: black;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 3px;
+}

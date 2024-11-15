@@ -1,0 +1,164 @@
+{
+    "GESTION": {
+      "TITULO": "GESTIÓN ESPACIOS FÍSICOS",
+      "SUBTITULO": "BUSCAR ESPACIO FÍSICO",
+      "ESPACIO_FISICO": "ESPACIO FÍSICO"
+    },
+    "HISTORICO":{
+      "TITULO": "HISTÓRICOS ESPACIOS FÍSICOS",
+      "SUBTITULO": "BUSCAR ESPACIO FÍSICO",
+      "ACLARACION": "* Información de espacios físicos a travez de los años"
+    },
+    "REGISTRAR":{
+      "TITULO":"REGISTRO ESPACIOS FÍSICOS"
+    },
+    "TOOLTIP": {
+      "NOMBRE_ESPACIO": {
+        "PARTE_1": "• El nombre del espacio físico debe ir en mayúsculas.",
+        "PARTE_2": "Ejemplo:",
+        "PARTE_3": "MODULO DE INVESTIGACION ",
+        "PARTE_4": "modulo de investigacion ❌"
+      },
+      "DEPENDENCIA_PADRE":{
+        "PARTE_1": "• Tener en cuenta que un espacio físico solo tiene",
+        "PARTE_2": "  una dependencia padre"
+      },
+      "CAMPOS":{
+        "PARTE_1": "• formulario de ingreso de campos, en esta parte puede",
+        "PARTE_2": "  ingresar tantos campos como considere con respecto al",
+        "PARTE_3": "  espacio físico, ejemplo:",
+        "PARTE_4": "  nombre: metraje",
+        "PARTE_5": "  Descripción: Dimensiones del espacio",
+        "PARTE_6": "  Código de abreviación: MET01"
+      },
+      "FACULTAD": {
+        "PARTE_1": "• El nombre de la Facultad debe ir en mayúsculas.",
+        "PARTE_2": "• Sin tildes."
+      },
+      "VICERRECTORIA": {
+        "PARTE_1": "• El nombre de la Vicerrectoría debe ir en mayúsculas.",
+        "PARTE_2": "• Sin tildes."
+      },
+      "ACCIONES":{
+        "EDITAR": "Editar Espacio",
+        "ACTIVAR": "Activar Espacio",
+        "DESACTIVAR": "Desactivar Espacio",
+        "DETALLES": "Ver Detalles"
+      },
+      "ANIO":{
+        "PARTE_1": "• Espacio para colocar los años, se pueden colocar varios años."
+      }
+    },
+    "FORMULARIO": {
+      "NOMBRE_ESPACIO": "NOMBRE ESPACIO FÍSICO",
+      "DESCRIPCION": "DESCRIPCIÓN",
+      "CODIGO_ABREVIACION": "CÓDIGO ABREVIACIÓN",
+      "TIPO_ESPACIO": "TIPO ESPACIO FÍSICO",
+      "TIPO_USO": "TIPO DE USO",
+      "DEPENDENCIA_PADRE": "DEPENDENCIA PADRE",
+      "DEPENDENCIA": "DEPENDENCIA",
+      "TIPO_EDIFICACION": "TIPO EDIFICACIÓN",
+      "TIPO_TERRENO": "TIPO TERRENO",
+      "NOMBRE_CAMPO": "NOMBRE CAMPO",
+      "REGISTRAR_ESPACIO": "REGISTRAR ESPACIO FÍSICO",
+      "AGREGAR_NUEVO_CAMPO": "AGREGAR NUEVO CAMPO",
+      "CAMPOS": "CAMPOS",
+      "ESTADO": "ESTADO",
+      "BUSCAR": "BUSCAR",
+      "OBSERVACIONES": "OBSERVACIONES",
+      "EDITAR": "EDITAR ESPACIO FÍSICO",
+      "ANIO": "AÑO ESPACIO FÍSICO",
+      "ESTADO_OPCIONES": {
+        "ACTIVO": "ACTIVO",
+        "NO_ACTIVO": "NO ACTIVO"
+      }
+    },
+    "TABLA_GESTION":{
+      "NOMBRE":"NOMBRE",
+      "CODIGO_ABREVIACION":"COD_ABREVIACIÓN",
+      "DESCRIPCION":"DESCRIPCIÓN",
+      "ESTADO":"ESTADO",
+      "TIPO_ESPACIO":"TIPO ESPACIO FÍSICO",
+      "TIPO_USO":"TIPO USO",
+      "ACCIONES":"ACCIONES"
+    },
+    "TABLA_HISTORICO":{
+      "NOMBRE":"NOMBRE",
+      "CODIGO_ABREVIACION":"COD_ABREVIACIÓN",
+      "TIPO_ESPACIO":"TIPO ESPACIO FÍSICO",
+      "TIPO_USO":"TIPO USO",
+      "DEPENDENCIA_ASOCIADA":"DEPENDENCIA ASOCIADA",
+      "OBSERVACIONES":"OBSERVACIONES"
+    },
+    "EXITO": {
+        "BUSQUEDA": "Datos cargados con éxito",
+        "EDITAR": "Dependencia editada",
+        "REGISTRAR":"Espacio Físico creado",
+        "ACTIVAR":"Dependencia activada",
+        "DESACTIVAR":"Dependencia desactivada"
+    },
+    "ERROR":{
+        "BUSQUEDA":{
+            "DATOS":"Error al buscar dependencias: Datos no disponibles",
+            "BUSQUEDA":"Error al buscar dependencias: "
+        },
+        "DESCONOCIDO":"Error desconocido",
+        "EDITAR": "Error al editar la dependencia",
+        "ORGANIGRAMA":"Error al cargar los datos del organigrama",
+        "REGISTRAR":"Error al crear el espacio físico",
+        "ACTIVAR":"Error al activar la dependencia",
+        "DESACTIVAR":"Error al desactivar la dependencia"
+    },
+    "ACCIONES": {
+      "EDITAR": "edit",
+      "ACEPTAR": "check",
+      "CANCELAR": "close",
+      "ELIMINAR": "delete",
+      "VISTA": "visibility",
+      "EDITAR2": "edit_note"
+    },
+    "CARGA":{
+      "REGISTRO":"Creando Espacio Físico...",
+      "BUSQUEDA":"Obteniendo datos...",
+      "ACTIVAR":"Activando Dependencia...",
+      "DESACTIVAR":"Desactivando Dependencia...",
+      "EDITAR":"Editando datos..."
+    },
+    "CONFIRMACION":{
+      "REGISTRAR":{
+        "PREGUNTA":"¿Desea registrar el espacio físico?",
+        "CONFIRMAR":"REGISTRAR",
+        "DENEGAR":"NO REGISTRAR"
+      },
+      "ACTIVAR":{
+        "PREGUNTA":"¿Desea activar la dependencia?",
+        "CONFIRMAR":"ACTIVAR",
+        "DENEGAR":"NO ACTIVAR"
+      },
+      "DESACTIVAR":{
+        "PREGUNTA":"¿Desea desactivar la dependencia?",
+        "CONFIRMAR":"DESACTIVAR",
+        "DENEGAR":"NO DESACTIVAR"
+      },
+      "EDITAR":{
+        "PREGUNTA":"¿Desea editar la dependencia?",
+        "CONFIRMAR":"EDITAR",
+        "DENEGAR":"NO EDITAR"
+      },
+      "CANCELAR":"CANCELAR",
+      "DENEGACION":"Los cambios no fueron guardados"
+    },
+    "POP_UP":{
+      "ICONO":{
+        "ERROR":"error",
+        "INFO":"info",
+        "EXITO":"success"
+      },
+      "TITULO":{
+        "EXITO":"Operación exitosa",
+        "ERROR":"Error"
+      },
+      "CONFIRMACION":"Aceptar"
+    }
+  }
+  
