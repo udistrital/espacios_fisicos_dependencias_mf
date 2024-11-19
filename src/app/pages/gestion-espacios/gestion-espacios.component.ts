@@ -122,6 +122,9 @@ export class GestionEspaciosComponent implements OnInit, AfterViewInit {
       data:{
         tipo:tipo,
         element:element,
+        dependencias: this.dependencias,
+        tipo_uso: this.tipo_uso,
+        tipo_espacio_fisico: this.tipo_espacio_fisico
       }
     });
   }
@@ -217,16 +220,6 @@ export class GestionEspaciosComponent implements OnInit, AfterViewInit {
             tipoUso: item.TipoUso ? {
               id: item.TipoUso.Id,
               nombre: item.TipoUso.Nombre
-            }: null,
-            campos: item.Campos ? item.Campos.map((campo: any) => ({
-              idCampo: campo.Id,
-              nombreCampo: campo.Nombre,
-              descripcion: campo.Descripcion,
-              codigoAbreviacion: campo.CodigoAbreviacion
-            })) : [],
-            dependenciaPadre: item.Dependencia ? {
-              id: item.Dependencia.Id,
-              nombre: item.Dependencia.Nombre
             }: null,
             estado: item.EspacioFisico.Activo ? 'ACTIVA' : 'NO ACTIVA',
           }));

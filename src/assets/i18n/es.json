@@ -92,7 +92,7 @@
     },
     "EXITO": {
         "BUSQUEDA": "Datos cargados con éxito",
-        "EDITAR": "Dependencia editada",
+        "EDITAR": "Espacio físico editado",
         "REGISTRAR":"Espacio Físico creado",
         "ACTIVAR":"Dependencia activada",
         "DESACTIVAR":"Dependencia desactivada"
@@ -141,7 +141,7 @@
         "DENEGAR":"NO DESACTIVAR"
       },
       "EDITAR":{
-        "PREGUNTA":"¿Desea editar la dependencia?",
+        "PREGUNTA":"¿Desea editar el espacio físico?",
         "CONFIRMAR":"EDITAR",
         "DENEGAR":"NO EDITAR"
       },
