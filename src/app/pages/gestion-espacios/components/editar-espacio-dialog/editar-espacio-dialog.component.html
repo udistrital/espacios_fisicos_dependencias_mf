@@ -81,6 +81,9 @@
                             <button class="boton-nuevo-campo" *ngIf="tipo === 'EDITAR'" (click)="agregarCampo()">
                                 {{ "FORMULARIO.AGREGAR_NUEVO_CAMPO" | translate }}
                             </button>
+                            <button class="boton-nuevo-campo" *ngIf="tipo === 'EDITAR'" (click)="mostrarSelectorDeCampos()">
+                                {{ "FORMULARIO.AGREGAR_CAMPO_EXISTENTE" | translate }}
+                            </button>
                         </div>
                     </div>                                                                     
                 </div>
@@ -152,22 +155,26 @@
                         </div>
                         <div class="campo nombre-campo">
                             <p class="nombre-input">{{ "FORMULARIO.NOMBRE_CAMPO" | translate }}</p>
-                            <input type="text" formControlName="nombre_campo"  [readonly]="tipo === 'DETALLES'">
+                            <input type="text" class="nombre-campo-input" formControlName="nombre_campo"  [readonly]=true>
                             <div class="error" *ngIf="campo.get('nombre_campo')?.errors?.['required']"> 
                                 {{ "* Campo obligatorio" | translate }}
                             </div>
                         </div>
                         <div class="campo descripcion-campo">
                             <p class="nombre-input">{{ "FORMULARIO.DESCRIPCION" | translate }}</p>
-                            <input type="text" formControlName="descripcion"  [readonly]="tipo === 'DETALLES'">
+                            <input type="text" class="descripcion-campo-input"  formControlName="descripcion"  [readonly]=true>
                             <div class="error" *ngIf="campo.get('descripcion')?.errors?.['required']">
                                 {{ "* Campo obligatorio" | translate }}
                             </div>
                         </div>
                         <div class="campo codigo-abreviacion-campo">
                             <p class="nombre-input">{{ "FORMULARIO.CODIGO_ABREVIACION" | translate }}</p>
-                            <input type="text" formControlName="codigo_abreviacion"  [readonly]="tipo === 'DETALLES'">
-                            <div class="error" *ngIf="campo.get('codigo_abreviacion')?.errors?.['required']">
+                            <input type="text" class="codigo-campo-input"  formControlName="codigo_abreviacion"  [readonly]=true>
+                        </div>
+                        <div class="campo valor-campo">
+                            <p class="nombre-input">{{ "FORMULARIO.VALOR" | translate }}</p>
+                            <input type="text" formControlName="valor"  [readonly]="campo.disabled || tipo === 'DETALLES'">
+                            <div class="error" *ngIf="campo.get('valor')?.errors?.['required']"> 
                                 {{ "* Campo obligatorio" | translate }}
                             </div>
                         </div>

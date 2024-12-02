@@ -4,7 +4,6 @@ export interface BusquedaHistorico {
     nombre: string;
     cod_abreviacion: string;
     tipoEspacio: string;
-    tipoUso: string;
     dependenciaAsociada: string;
-    observaciones: string;
+    descripcion: string;
 }

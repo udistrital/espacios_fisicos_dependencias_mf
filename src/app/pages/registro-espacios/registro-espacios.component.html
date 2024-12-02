@@ -64,6 +64,9 @@
                                             <button class="boton-nuevo-campo" (click)="agregarCampo()">
                                                 {{ "FORMULARIO.AGREGAR_NUEVO_CAMPO" | translate }}
                                             </button>
+                                            <button class="boton-nuevo-campo" (click)="mostrarSelectorDeCampos()">
+                                                {{ "FORMULARIO.AGREGAR_CAMPO_EXISTENTE" | translate }}
+                                            </button>
                                         </div>
                                     </div>                                                                     
                                 </div>
@@ -122,22 +125,26 @@
                                         </div>
                                         <div class="campo nombre-campo">
                                             <p class="nombre-input">{{ "FORMULARIO.NOMBRE_CAMPO" | translate }}</p>
-                                            <input type="text" formControlName="nombre_campo">
+                                            <input type="text" formControlName="nombre_campo" [readonly]="campo.disabled">
                                             <div class="error" *ngIf="campo.get('nombre_campo')?.errors?.['required']"> 
                                                 {{ "* Campo obligatorio" | translate }}
                                             </div>
                                         </div>
                                         <div class="campo descripcion-campo">
                                             <p class="nombre-input">{{ "FORMULARIO.DESCRIPCION" | translate }}</p>
-                                            <input type="text" formControlName="descripcion">
+                                            <input type="text" formControlName="descripcion" [readonly]="campo.disabled">
                                             <div class="error" *ngIf="campo.get('descripcion')?.errors?.['required']">
                                                 {{ "* Campo obligatorio" | translate }}
                                             </div>
                                         </div>
                                         <div class="campo codigo-abreviacion-campo">
                                             <p class="nombre-input">{{ "FORMULARIO.CODIGO_ABREVIACION" | translate }}</p>
-                                            <input type="text" formControlName="codigo_abreviacion">
-                                            <div class="error" *ngIf="campo.get('codigo_abreviacion')?.errors?.['required']">
+                                            <input type="text" formControlName="codigo_abreviacion" [readonly]="campo.disabled">
+                                        </div>
+                                        <div class="campo valor-campo">
+                                            <p class="nombre-input">{{ "FORMULARIO.VALOR" | translate }}</p>
+                                            <input type="text" formControlName="valor"  [readonly]="campo.disabled">
+                                            <div class="error" *ngIf="campo.get('valor')?.errors?.['required']"> 
                                                 {{ "* Campo obligatorio" | translate }}
                                             </div>
                                         </div>

@@ -6,7 +6,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { BusquedaHistorico } from 'src/app/models/busquedaHistorico.models';
 import { PopUpManager } from '../../managers/popUpManager';
 import { TranslateService } from '@ngx-translate/core';
-
+import { OikosService } from 'src/app/services/oikos.service';
+import { EditarEspacioDialogComponent } from '../gestion-espacios/components/editar-espacio-dialog/editar-espacio-dialog.component'
+import { catchError, tap, map } from 'rxjs/operators';
+import { EditarDetalles } from 'src/app/models/editarDetalles.models';
+// @ts-ignore
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 @Component({
   selector: 'app-historico-espacios',
   templateUrl: './historico-espacios.component.html',
@@ -16,74 +21,8 @@ export class HistoricoEspaciosComponent  implements OnInit, AfterViewInit {
   @Input('normalform') normalform: any;
   mostrarTabla: boolean = false;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  columnasBusqueda = signal<string[]>(["NOMBRE","COD_ABREVIACIÓN","TIPO ESPACIO FÍSICO", "TIPO USO", "DEPENDENCIA ASOCIADA", "OBSERVACIONES"]);
-  anios = signal<number[]>([2018,2019,2020,2021,2022,2023]);
-  elementosBusqueda: BusquedaHistorico[] = [
-    {
-      id: 1,
-      nombre: "SALON 501 TORRE 1",
-      cod_abreviacion: "BREV0011",
-      tipoEspacio: "Cuarto",
-      tipoUso: "Salón",
-      dependenciaAsociada: "VICERRECTORIA",
-      observaciones: "Observacion *"
-    },
-    {
-      id: 2,
-      nombre: "LABORATORIO QUÍMICA",
-      cod_abreviacion: "LABQ002",
-      tipoEspacio: "Laboratorio",
-      tipoUso: "Científico",
-      dependenciaAsociada: "VICERRECTORIA",
-      observaciones: "Observacion *"
-    },
-    {
-      id: 3,
-      nombre: "SALA DE REUNIONES CENTRAL",
-      cod_abreviacion: "SR003",
-      tipoEspacio: "Sala",
-      tipoUso: "Reuniones",
-      dependenciaAsociada: "VICERRECTORIA",
-      observaciones: "Observacion *"
-    },
-    {
-      id: 4,
-      nombre: "GIMNASIO PRINCIPAL",
-      cod_abreviacion: "GYM004",
-      tipoEspacio: "Gimnasio",
-      tipoUso: "Deportivo",
-      dependenciaAsociada: "VICERRECTORIA",
-      observaciones: "Observacion *"
-    },
-    {
-      id: 5,
-      nombre: "AUDITORIO TORRE 2",
-      cod_abreviacion: "AUDT005",
-      tipoEspacio: "Auditorio",
-      tipoUso: "Conferencias",
-      dependenciaAsociada: "VICERRECTORIA",
-      observaciones: "Observacion *"
-    },
-    {
-      id: 6,
-      nombre: "BIBLIOTECA GENERAL",
-      cod_abreviacion: "BIBG006",
-      tipoEspacio: "Biblioteca",
-      tipoUso: "Estudio",
-      dependenciaAsociada: "VICERRECTORIA",
-      observaciones: "Observacion *"
-    },
-    {
-      id: 7,
-      nombre: "CAFETERÍA NORTE",
-      cod_abreviacion: "CAF007",
-      tipoEspacio: "Cafetería",
-      tipoUso: "Alimentación",
-      dependenciaAsociada: "VICERRECTORIA",
-      observaciones: "Observacion *"
-    }
-  ];
-  
+  columnasBusqueda = signal<string[]>(["NOMBRE","COD_ABREVIACIÓN","TIPO ESPACIO FÍSICO", "DEPENDENCIA ASOCIADA", "OBSERVACIONES"]);
+  anios = signal<number[]>([2018,2019,2020,2021,2022,2023,2024]);
 
   datos = new MatTableDataSource<BusquedaHistorico>();
   historicoForm !:  FormGroup;
@@ -91,6 +30,7 @@ export class HistoricoEspaciosComponent  implements OnInit, AfterViewInit {
   constructor(
     private popUpManager: PopUpManager,
     private translate: TranslateService,
+    private oikosService: OikosService,
     public dialog: MatDialog,
   ){
     translate.setDefaultLang('es');
@@ -114,11 +54,92 @@ export class HistoricoEspaciosComponent  implements OnInit, AfterViewInit {
   }
 
   buscarEspacios() {
-    this.datos = new MatTableDataSource<BusquedaHistorico>(this.elementosBusqueda);
-    setTimeout(() => { this.datos.paginator = this.paginator; }, 1000);
-    this.popUpManager.showSuccessAlert(this.translate.instant('EXITO.BUSQUEDA'));
-    this.mostrarTabla = true;  
-    console.log(this.datos);
+    this.busqueda().then((resultadosParciales) => {
+      console.log("AAAAAAAAAAA")
+      console.log(resultadosParciales);
+      this.procesarResultados(resultadosParciales);
+    });
+      
+  }
+
+  procesarResultados(resultados: any[]) {
+    if (resultados.length > 0) {
+      this.datos = new MatTableDataSource<BusquedaHistorico>(resultados);
+      setTimeout(() => { this.datos.paginator = this.paginator; }, 1000);
+      this.popUpManager.showSuccessAlert(this.translate.instant('EXITO.BUSQUEDA'));
+      this.mostrarTabla = true;  
+    } else {
+      this.popUpManager.showErrorAlert(this.translate.instant('ERROR.BUSQUEDA.DATOS'));
+      this.mostrarTabla = false;
+    }
+  }
+  
+  async busqueda(): Promise<any[]> {
+    this.popUpManager.showLoaderAlert(this.translate.instant('CARGA.BUSQUEDA'));
+  
+    const anios = this.historicoForm.value.anio; 
+    let resultadosCombinados: any[] = [];
+  
+    for (const anio of anios) {
+      const resultados = await this.buscarPorAnio(anio);
+      resultadosCombinados = resultadosCombinados.concat(resultados);  
+    }
+  
+    return resultadosCombinados;
+  }
+
+  buscarPorAnio(anio: number): Promise<any[]> {
+    const url = 'asignacion_espacio_fisico_dependencia?limit=-1&query=EspacioFisicoId__FechaCreacion__startswith:'+anio;
+    console.log(url)
+    return this.oikosService.get(url).pipe(
+      map((res: any) => {
+        console.log(res)
+        if (res) {
+          console.log("kheeeee")
+          return res.map((item: any) => ({
+            id: item.EspacioFisicoId.Id || null,
+            nombre: item.EspacioFisicoId.Nombre || '',
+            cod_abreviacion: item.EspacioFisicoId.CodigoAbreviacion || '',
+            tipoEspacio: item.EspacioFisicoId.TipoEspacioFisicoId.Nombre || '',
+            dependenciaAsociada: item.DependenciaId.Nombre || '',
+            descripcion: item.EspacioFisicoId.Descripcion || '',
+          }));
+        } else {
+          return [];
+        }
+      }),
+      catchError((error) => {
+        return [];
+      })
+    ).toPromise();
+  }
+
+  abrirDialogDetallesEditarEspacio(tipo: string, element: BusquedaHistorico){
+    const datos: EditarDetalles = {} as EditarDetalles;
+    datos.id = element.id;
+    datos.nombre = element.nombre;
+    datos.cod_abreviacion = element.cod_abreviacion;
+    datos.descripcion = element.descripcion;
+    datos.tipoEspacio = {
+      id: 0,
+      nombre: element.tipoEspacio
+    };
+    datos.dependenciaPadre = {
+      id: 0,
+      nombre: element.dependenciaAsociada
+    };
+    datos.gestion = false;
+
+    const dialogRef = this.dialog.open(EditarEspacioDialogComponent, {
+      width: '70%',
+      height: 'auto',
+      maxHeight: '65vh',
+      data:{
+        tipo:tipo,
+        element:datos,
+        historico: true
+      }
+    });
   }
 
 }

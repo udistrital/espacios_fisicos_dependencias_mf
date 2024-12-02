@@ -155,13 +155,16 @@ input, mat-select, select {
     width: 40%; 
 }
 
-
 .descripcion-campo {
     width: 60%; 
 }
 
 .codigo-abreviacion-campo {
-    width: 30%;
+    width: 15%;
+}
+
+.valor-campo {
+    width: 15%;
 }
 
 .divider-campo{

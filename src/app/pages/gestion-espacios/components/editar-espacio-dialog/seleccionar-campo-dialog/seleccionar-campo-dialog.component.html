@@ -1,0 +1,18 @@
+<mat-card>
+    <div class="contenido-campo">
+        <mat-card-title class="titulo">{{ "SELECCIONAR_CAMPO.TITULO"  | translate }}</mat-card-title> 
+        <button class="boton-salir" (click)="onCloseClick()">x</button>
+    </div>
+    <mat-divider class="divider"></mat-divider>
+    <mat-card-content>
+        <p class="nombre-input">{{ "FORMULARIO.SELECCIONAR_CAMPO" | translate }}</p>
+        <mat-select [(value)]="campoSeleccionado">
+            <mat-option *ngFor="let campo of campos" [value]="campo">
+            {{ campo.nombreCampo }}
+            </mat-option>
+        </mat-select>
+        <button  class="boton-accion"  [disabled]="!campoSeleccionado" (click)="onConfirm()">
+        {{ "AGREGAR" | translate }}
+        </button>
+    </mat-card-content>
+</mat-card>
