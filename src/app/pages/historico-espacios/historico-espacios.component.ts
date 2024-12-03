@@ -22,7 +22,7 @@ export class HistoricoEspaciosComponent  implements OnInit, AfterViewInit {
   mostrarTabla: boolean = false;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   columnasBusqueda = signal<string[]>(["NOMBRE","COD_ABREVIACIÓN","TIPO ESPACIO FÍSICO", "DEPENDENCIA ASOCIADA", "OBSERVACIONES"]);
-  anios = signal<number[]>([2018,2019,2020,2021,2022,2023,2024]);
+  anios = signal<number[]>([]);
 
   datos = new MatTableDataSource<BusquedaHistorico>();
   historicoForm !:  FormGroup;
@@ -38,10 +38,37 @@ export class HistoricoEspaciosComponent  implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.iniciarFormularioConsulta();
+    this.calcularAnios();
   }
 
   ngAfterViewInit() {
     this.datos.paginator = this.paginator;
+  }
+
+  calcularAnios() {
+    this.oikosService
+      .get('asignacion_espacio_fisico_dependencia?limit=1&sortby=EspacioFisicoId__FechaCreacion&order=asc')
+      .subscribe(
+        (res: any) => {
+          if (res && res.length > 0) {
+            const fechaCreacion: string = res[0].EspacioFisicoId.FechaCreacion;
+            const anioInicial: number = new Date(fechaCreacion).getFullYear();
+            const anioActual: number = new Date().getFullYear();
+
+            const aniosCalculados: number[] = [];
+            for (let anio = anioInicial; anio <= anioActual; anio++) {
+              aniosCalculados.push(anio);
+            }
+            this.anios.set(aniosCalculados);
+
+          } else {
+            this.popUpManager.showErrorAlert(this.translate.instant('ERROR.BUSQUEDA.DATOS'));
+          }
+        },
+        (error) => {
+          this.popUpManager.showErrorAlert(this.translate.instant('ERROR.BUSQUEDA.DATOS'));
+        }
+      );
   }
 
   iniciarFormularioConsulta(){

@@ -52,7 +52,6 @@ export class EditarEspacioDialogComponent implements OnInit {
       this.dependencias = data.dependencias;
       this.tipo_uso = data.tipo_uso;
       this.tipo_espacio_fisico = data.tipo_espacio_fisico;
-      
     }
   }
 
@@ -103,9 +102,12 @@ export class EditarEspacioDialogComponent implements OnInit {
       if (this.element) {
         if(this.element.gestion){
           this.asignarDependencia(this.element.id);
+          console.log("AAAAAAAAAAAAAA")
+          console.log(this.tipo_espacio_fisico)
           const tipoEspacioPreseleccionado = this.tipo_espacio_fisico.find(espacio => espacio.id === this.element.tipoEspacio?.id) || null;
           this.editarForm.get('tipo_espacio_fisico')?.setValue(tipoEspacioPreseleccionado);
           this.nombreTipoEspacio = tipoEspacioPreseleccionado ? tipoEspacioPreseleccionado.nombre : null;
+          console.log(tipoEspacioPreseleccionado)
           const tipoUsoPreseleccionado = this.tipo_uso.find(uso => uso.id === this.element.tipoUso?.id) || null;
           this.editarForm.get('tipo_uso')?.setValue(tipoUsoPreseleccionado);
           this.nombreTipoUso = tipoUsoPreseleccionado ? tipoUsoPreseleccionado.nombre : null;
@@ -289,21 +291,21 @@ export class EditarEspacioDialogComponent implements OnInit {
         this.popUpManager.showLoaderAlert(this.translate.instant('CARGA.EDITAR'));
         const editar = this.construirEdicion();
         console.log(editar);
-        // this.oikosMidService.post("gestion_espacios_fisicos_mid/EditarEspacioFisico", editar).pipe(
-        //   tap((res: any) => {
-        //       if (res.Success) {
-        //           this.popUpManager.showSuccessAlert(this.translate.instant('EXITO.EDITAR'));
-        //           this.espacioActualizado.emit();
-        //       } else {
-        //           this.popUpManager.showErrorAlert(this.translate.instant('ERROR.EDITAR'));
-        //       }
-        //   }),
-        //   catchError((error) => {
-        //       console.error('Error en la solicitud:', error);
-        //       this.popUpManager.showErrorAlert(this.translate.instant('ERROR.EDITAR') +": " + (error.message || this.translate.instant('ERROR.DESCONOCIDO')));
-        //       return of(null); 
-        //   })
-        // ).subscribe();
+        this.oikosMidService.post("gestion_espacios_fisicos_mid/EditarEspacioFisico", editar).pipe(
+          tap((res: any) => {
+              if (res.Success) {
+                  this.popUpManager.showSuccessAlert(this.translate.instant('EXITO.EDITAR'));
+                  this.espacioActualizado.emit();
+              } else {
+                  this.popUpManager.showErrorAlert(this.translate.instant('ERROR.EDITAR'));
+              }
+          }),
+          catchError((error) => {
+              console.error('Error en la solicitud:', error);
+              this.popUpManager.showErrorAlert(this.translate.instant('ERROR.EDITAR') +": " + (error.message || this.translate.instant('ERROR.DESCONOCIDO')));
+              return of(null); 
+          })
+        ).subscribe();
         this.dialogRef.close();
       }
     })
