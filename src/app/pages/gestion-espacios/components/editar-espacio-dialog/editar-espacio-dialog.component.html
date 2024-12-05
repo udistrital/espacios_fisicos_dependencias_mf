@@ -40,13 +40,23 @@
                             </span>
                         </button> 
                     </p>
-                    <input type="text" formControlName="dependencia_padre"  [readonly]="tipo === 'DETALLES'">
-                    <div class="error" *ngIf="editarForm.get('dependencia_padre')?.errors?.['required'] ">
-                        {{ "* Campo obligatorio" | translate }}
-                    </div>     
+                    <div *ngIf="tipo === 'DETALLES'; else editarDependencia" >
+                        <input type="text" formControlName="dependencia_padre" [value]="nombreDependencia || ''"
+                        [readonly]="true">
+                    </div>
+                    <ng-template #editarDependencia>
+                        <select formControlName="dependencia_padre">
+                            <option *ngFor="let item of dependencias" [ngValue]="item">
+                              {{ item.nombre }}
+                            </option>
+                        </select>
+                        <div class="error" *ngIf="editarForm.get('dependencia_padre')?.errors?.['required'] ">
+                            {{ "* Campo obligatorio" | translate }}
+                        </div>     
+                    </ng-template>
                     <br>
                     <br> 
-                    <button class="boton-accion" [disabled]="!editarForm.valid"
+                    <button class="boton-accion" (click)="editarEspacio()" [disabled]="!editarForm.valid" 
                             [ngClass]="{'btn-disabled': !editarForm.valid, 'btn-enabled': editarForm.valid}" *ngIf="tipo === 'EDITAR'" >
                         {{ "FORMULARIO.EDITAR" | translate }}
                     </button>   
@@ -71,6 +81,9 @@
                             <button class="boton-nuevo-campo" *ngIf="tipo === 'EDITAR'" (click)="agregarCampo()">
                                 {{ "FORMULARIO.AGREGAR_NUEVO_CAMPO" | translate }}
                             </button>
+                            <button class="boton-nuevo-campo" *ngIf="tipo === 'EDITAR'" (click)="mostrarSelectorDeCampos()">
+                                {{ "FORMULARIO.AGREGAR_CAMPO_EXISTENTE" | translate }}
+                            </button>
                         </div>
                     </div>                                                                     
                 </div>
@@ -83,28 +96,46 @@
                     <div class="columns-container">
                         <div class="column">
                             <p class="nombre-input">{{ "FORMULARIO.TIPO_ESPACIO" | translate }}</p>
-                            <input type="text" formControlName="tipo_espacio_fisico"  [readonly]="tipo === 'DETALLES'">
-                            <div class="error" *ngIf="editarForm.get('tipo_espacio_fisico')?.errors?.['required'] ">
-                                {{ "* Campo obligatorio" | translate }}
+                            <div *ngIf="tipo === 'DETALLES'; else editarTipoEspacio" >
+                                <input input type="text" formControlName="tipo_espacio_fisico" [value]="nombreTipoEspacio || ''" [readonly]="true">
                             </div>
+                            <ng-template #editarTipoEspacio>
+                                <select formControlName="tipo_espacio_fisico">
+                                    <option *ngFor="let item of tipo_espacio_fisico" [ngValue]="item">
+                                      {{ item.nombre }}
+                                    </option>
+                                </select>
+                                <div class="error" *ngIf="editarForm.get('tipo_espacio_fisico')?.errors?.['required'] ">
+                                    {{ "* Campo obligatorio" | translate }}
+                                </div>     
+                            </ng-template>
                             <p class="nombre-input">{{ "FORMULARIO.TIPO_EDIFICACION" | translate }}</p>
                             <input type="text" formControlName="tipo_edificacion"  [readonly]="tipo === 'DETALLES'">
                         </div>
                         <div class="column">
                             <p class="nombre-input">{{ "FORMULARIO.TIPO_USO" | translate }}</p>
-                            <input type="text" formControlName="tipo_uso"  [readonly]="tipo === 'DETALLES'">
-                            <div class="error" *ngIf="editarForm.get('tipo_uso')?.errors?.['required'] ">
-                                {{ "* Campo obligatorio" | translate }}
+                            <div *ngIf="tipo === 'DETALLES'; else editarTipoUso" >
+                                <input type="text" formControlName="tipo_uso" [value]="nombreTipoUso || ''" [readonly]="true">
                             </div>
+                            <ng-template #editarTipoUso>
+                                <select formControlName="tipo_uso">
+                                    <option *ngFor="let item of tipo_uso" [ngValue]="item">
+                                      {{ item.nombre }}
+                                    </option>
+                                </select>
+                                <div class="error" *ngIf="editarForm.get('tipo_uso')?.errors?.['required'] ">
+                                    {{ "* Campo obligatorio" | translate }}
+                                </div>     
+                            </ng-template>
                             <p class="nombre-input">{{ "FORMULARIO.TIPO_TERRENO" | translate }}</p>
                             <input type="text" formControlName="tipo_terreno"  [readonly]="tipo === 'DETALLES'">
                         </div>
                     </div>
-                    <p class="nombre-input">{{ "FORMULARIO.OBSERVACIONES" | translate }}</p>
+                    <!-- <p class="nombre-input">{{ "FORMULARIO.OBSERVACIONES" | translate }}</p>
                     <textarea formControlName="observaciones" rows="4" class="descripcion-input"  [readonly]="tipo === 'DETALLES'"></textarea>
                     <div class="error" *ngIf="editarForm.get('observaciones')?.invalid">
                         {{ "* Campo obligatorio" | translate }}
-                    </div>
+                    </div> -->
                 </div>                               
             
             </div>
@@ -124,22 +155,26 @@
                         </div>
                         <div class="campo nombre-campo">
                             <p class="nombre-input">{{ "FORMULARIO.NOMBRE_CAMPO" | translate }}</p>
-                            <input type="text" formControlName="nombre_campo"  [readonly]="tipo === 'DETALLES'">
+                            <input type="text" class="nombre-campo-input" formControlName="nombre_campo"  [readonly]=true>
                             <div class="error" *ngIf="campo.get('nombre_campo')?.errors?.['required']"> 
                                 {{ "* Campo obligatorio" | translate }}
                             </div>
                         </div>
                         <div class="campo descripcion-campo">
                             <p class="nombre-input">{{ "FORMULARIO.DESCRIPCION" | translate }}</p>
-                            <input type="text" formControlName="descripcion"  [readonly]="tipo === 'DETALLES'">
+                            <input type="text" class="descripcion-campo-input"  formControlName="descripcion"  [readonly]=true>
                             <div class="error" *ngIf="campo.get('descripcion')?.errors?.['required']">
                                 {{ "* Campo obligatorio" | translate }}
                             </div>
                         </div>
                         <div class="campo codigo-abreviacion-campo">
                             <p class="nombre-input">{{ "FORMULARIO.CODIGO_ABREVIACION" | translate }}</p>
-                            <input type="text" formControlName="codigo_abreviacion"  [readonly]="tipo === 'DETALLES'">
-                            <div class="error" *ngIf="campo.get('codigo_abreviacion')?.errors?.['required']">
+                            <input type="text" class="codigo-campo-input"  formControlName="codigo_abreviacion"  [readonly]=true>
+                        </div>
+                        <div class="campo valor-campo">
+                            <p class="nombre-input">{{ "FORMULARIO.VALOR" | translate }}</p>
+                            <input type="text" formControlName="valor"  [readonly]="campo.disabled || tipo === 'DETALLES'">
+                            <div class="error" *ngIf="campo.get('valor')?.errors?.['required']"> 
                                 {{ "* Campo obligatorio" | translate }}
                             </div>
                         </div>

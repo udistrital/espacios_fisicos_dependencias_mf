@@ -1,16 +1,19 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PopUpManager } from '../../managers/popUpManager';
-import { FormControl, FormGroup, Validators, FormArray  } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormArray, AbstractControl} from '@angular/forms';
 import { Desplegables } from 'src/app/models/desplegables.models';
 import { MatDialogRef } from '@angular/material/dialog';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 import { Campo } from 'src/app/models/campo.models';
+import { MatDialog } from '@angular/material/dialog';
 import { OikosService } from 'src/app/services/oikos.service';
 import { OikosMidService } from 'src/app/services/oikos_mid.service';
 import { catchError, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 // @ts-ignore
 import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { SeleccionarCampoDialogComponent } from '../gestion-espacios/components/editar-espacio-dialog/seleccionar-campo-dialog/seleccionar-campo-dialog.component';
+
 
 @Component({
   selector: 'app-registro-espacios',
@@ -25,6 +28,7 @@ export class RegistroEspaciosComponent implements OnInit {
   tipo_uso: Desplegables[] = [];
   dependencia_padre: Desplegables[] = [];
   registroForm!: FormGroup;
+  camposExistentes: Array<Campo> = [];
 
   campos: Array<Campo> = [];
 
@@ -33,12 +37,14 @@ export class RegistroEspaciosComponent implements OnInit {
     public dialogRef: MatDialogRef<RegistroEspaciosComponent>,
     private translate: TranslateService,
     public oikosService: OikosService,
+    public dialog: MatDialog,
     public oikosMidService: OikosMidService,
   ) {
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {});
     this.cargarTiposEspacioFisico();
     this.cargarTiposUso();
     this.cargarDependencias();
+    this.cargarCamposExistentes();
   }
 
   ngOnInit() {
@@ -92,6 +98,7 @@ export class RegistroEspaciosComponent implements OnInit {
       nombre_campo: new FormControl('', Validators.required),
       descripcion: new FormControl('', Validators.required),
       codigo_abreviacion: new FormControl('', Validators.required),
+      valor: new FormControl('', Validators.required),
     });
     this.camposDinamicos.push(nuevoCampo);
   }
@@ -128,7 +135,8 @@ export class RegistroEspaciosComponent implements OnInit {
     const camposDinamicos = this.camposDinamicos.controls.map(campo => ({
       NombreCampo: campo.get('nombre_campo')?.value,
       Descripcion: campo.get('descripcion')?.value,
-      CodigoAbreviacion: campo.get('codigo_abreviacion')?.value
+      CodigoAbreviacion: campo.get('codigo_abreviacion')?.value,
+      Valor: campo.get('valor')?.value
     }));
     return{
       EspacioFisico:{
@@ -171,6 +179,54 @@ export class RegistroEspaciosComponent implements OnInit {
       }
     })
   }
+
+  cargarCamposExistentes() {
+    this.oikosService.get('campo?limit=-1').subscribe((res: any) => {
+      if (res && res.length > 0) {
+        this.camposExistentes = res.map((campo: any) => ({
+          idCampo: campo.Id,
+          nombreCampo: campo.Nombre,
+          descripcion: campo.Descripcion,
+          codigoAbreviacion: campo.CodigoAbreviacion
+        }));
+      }
+    });
+  }
+
+  mostrarSelectorDeCampos(): void {
+    const dialogRef = this.dialog.open(SeleccionarCampoDialogComponent, {
+      width: '500px',
+      data: this.camposExistentes,
+    });
+
+    dialogRef.afterClosed().subscribe((campoSeleccionado) => {
+      if (campoSeleccionado) {
+        this.agregarCampoExistente(campoSeleccionado);
+      }
+    });
+  }
+
+  agregarCampoExistente(campo: Campo) {
+    const existeCampo = this.camposDinamicos.controls.some((control: AbstractControl) => {
+      const formGroup = control as FormGroup;
+      return formGroup.get('idCampo')?.value === campo.idCampo;
+    });
+    if (existeCampo) {
+      this.popUpManager.showErrorAlert('El campo ya existe en este espacio físico.');
+      return;
+    }
+    const campoNoEditable = new FormGroup({
+      idCampo: new FormControl(campo.idCampo),
+      nombre_campo: new FormControl({ value: campo.nombreCampo, disabled: true }),
+      descripcion: new FormControl({ value: campo.descripcion, disabled: true }),
+      codigo_abreviacion: new FormControl({ value: campo.codigoAbreviacion, disabled: true }),
+      valor: new FormControl('', Validators.required),
+    });
+    this.camposDinamicos.push(campoNoEditable);
+    console.log(campoNoEditable.get("idCampo")?.value)
+  }
+
+  
 
   eliminarCampo(index: number) {
     this.camposDinamicos.removeAt(index);

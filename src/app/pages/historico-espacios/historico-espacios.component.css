@@ -149,16 +149,6 @@ th.mat-sort-header-sorted {
     z-index: 1000;
 }
 
-.boton-acciones{
-    position: relative;
-    display: inline-block;
-}
-
-.boton-acciones:hover .tooltip{
-    visibility: visible;
-    opacity: 1;
-}
-
 .column {
     margin-top: 5px;
 }

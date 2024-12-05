@@ -13,6 +13,7 @@ import { OikosMidService } from 'src/app/services/oikos_mid.service';
 import { catchError, tap, map } from 'rxjs/operators';
 // @ts-ignore
 import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { EditarDetalles } from 'src/app/models/editarDetalles.models';
 
 @Component({
   selector: 'app-gestion-espacios',
@@ -115,13 +116,29 @@ export class GestionEspaciosComponent implements OnInit, AfterViewInit {
   // }
 
   abrirDialogDetallesEditarEspacio(tipo: string, element:BusquedaGestion){
+    const datos: EditarDetalles = {} as EditarDetalles;
+    datos.id = element.id;
+    datos.nombre = element.nombre;
+    datos.cod_abreviacion = element.cod_abreviacion;
+    datos.descripcion = element.descripcion;
+    datos.tipoEspacio = element.tipoEspacio;
+    datos.tipoUso = element.tipoUso;
+    datos.tipoEdificacion = element.tipoEdificacion;
+    datos.tipoTerreno = element.tipoTerreno;
+    datos.dependenciaPadre = element.dependenciaPadre;
+    datos.campos = element.campos;
+    datos.gestion = true;
+
     const dialogRef = this.dialog.open(EditarEspacioDialogComponent, {
       width: '70%',
       height: 'auto',
       maxHeight: '65vh',
       data:{
         tipo:tipo,
-        element:element,
+        element:datos,
+        dependencias: this.dependencias,
+        tipo_uso: this.tipo_uso,
+        tipo_espacio_fisico: this.tipo_espacio_fisico
       }
     });
   }
@@ -217,16 +234,6 @@ export class GestionEspaciosComponent implements OnInit, AfterViewInit {
             tipoUso: item.TipoUso ? {
               id: item.TipoUso.Id,
               nombre: item.TipoUso.Nombre
-            }: null,
-            campos: item.Campos ? item.Campos.map((campo: any) => ({
-              idCampo: campo.Id,
-              nombreCampo: campo.Nombre,
-              descripcion: campo.Descripcion,
-              codigoAbreviacion: campo.CodigoAbreviacion
-            })) : [],
-            dependenciaPadre: item.Dependencia ? {
-              id: item.Dependencia.Id,
-              nombre: item.Dependencia.Nombre
             }: null,
             estado: item.EspacioFisico.Activo ? 'ACTIVA' : 'NO ACTIVA',
           }));
