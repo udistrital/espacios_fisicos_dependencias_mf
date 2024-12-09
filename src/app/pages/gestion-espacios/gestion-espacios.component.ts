@@ -249,4 +249,74 @@ export class GestionEspaciosComponent implements OnInit, AfterViewInit {
     ).toPromise() as Promise<any[]>;
   }
 
+  activarDependenciaComprobacion(element: any){
+    this.popUpManager.showConfirmAlert(this.translate.instant('CONFIRMACION.ACTIVAR.PREGUNTA'),this.translate.instant('CONFIRMACION.ACTIVAR.CONFIRMAR'),this.translate.instant('CONFIRMACION.ACTIVAR.DENEGAR')).then((result) =>{
+      if (result === true){
+        const elemento = {
+          Id: element.id
+        }
+        this.activarEspacio(elemento)
+      }
+    })
+  }
+
+  desactivarDependenciaComprobacion(element: any){
+    this.popUpManager.showConfirmAlert(this.translate.instant('CONFIRMACION.DESACTIVAR.PREGUNTA'),this.translate.instant('CONFIRMACION.DESACTIVAR.CONFIRMAR'),this.translate.instant('CONFIRMACION.DESACTIVAR.DENEGAR')).then((result) =>{
+      if (result === true){
+        const elemento = {
+          Id: element.id
+        }
+        this.desactivarEspacio(elemento)
+      }
+    })
+  }
+
+  async activarEspacio(element: any) {
+    this.popUpManager.showLoaderAlert(this.translate.instant('CARGA.ACTIVAR'));
+    try {
+      const response: any = await this.oikosMidService.put("gestion_espacios_fisicos_mid/ActivarEspacioFisico", element).toPromise();
+      console.log(response)
+      if (response) {
+        Swal.close();
+        this.popUpManager.showSuccessAlert(this.translate.instant('EXITO.ACTIVAR'));
+
+        const busqueda = this.construirBusqueda();
+        this.busqueda(busqueda).then((resultados) => {
+          this.procesarResultados(resultados);
+        });
+      } else {
+        Swal.close();
+        this.popUpManager.showErrorAlert(this.translate.instant('ERROR.ACTIVAR'));
+      }
+    } catch (error) {
+      Swal.close();
+      this.popUpManager.showErrorAlert(this.translate.instant('ERROR.ACTIVAR') + ":" + this.translate.instant('ERROR.DESCONOCIDO'));
+    }
+
+  }
+
+  async desactivarEspacio(element: any) {
+    this.popUpManager.showLoaderAlert(this.translate.instant('CARGA.DESACTIVAR'));
+    try {
+      const response: any = await this.oikosMidService.put("gestion_espacios_fisicos_mid/DesactivarEspacioFisico", element).toPromise();
+      if (response) {
+        Swal.close();
+        this.popUpManager.showSuccessAlert(this.translate.instant('EXITO.DESACTIVAR'));
+
+        const busqueda = this.construirBusqueda();
+        this.busqueda(busqueda).then((resultados) => {
+          this.procesarResultados(resultados);
+        });
+      } else {
+        Swal.close();
+        this.popUpManager.showErrorAlert(this.translate.instant('ERROR.DESACTIVAR'));
+      }
+    } catch (error) {
+      Swal.close();
+      this.popUpManager.showErrorAlert(this.translate.instant('ERROR.DESACTIVAR') + ":" + this.translate.instant('ERROR.DESCONOCIDO'));
+    }
+
+  }
+
+
 }

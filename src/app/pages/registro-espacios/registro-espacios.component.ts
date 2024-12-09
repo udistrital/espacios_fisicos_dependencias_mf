@@ -93,15 +93,6 @@ export class RegistroEspaciosComponent implements OnInit {
     return this.registroForm.get('camposDinamicos') as FormArray;
   }
 
-  agregarCampo() {
-    const nuevoCampo = new FormGroup({
-      nombre_campo: new FormControl('', Validators.required),
-      descripcion: new FormControl('', Validators.required),
-      codigo_abreviacion: new FormControl('', Validators.required),
-      valor: new FormControl('', Validators.required),
-    });
-    this.camposDinamicos.push(nuevoCampo);
-  }
 
   cargarTiposEspacioFisico(){
     this.oikosService.get('tipo_espacio_fisico?limit=-1&query=Activo:true').subscribe((res:any)=>{
@@ -132,15 +123,14 @@ export class RegistroEspaciosComponent implements OnInit {
 
   construirObjetoRegistro(): any{
     const formValues = this.registroForm.value;
-    const camposDinamicos = this.camposDinamicos.controls.map(campo => ({
-      NombreCampo: campo.get('nombre_campo')?.value,
-      Descripcion: campo.get('descripcion')?.value,
-      CodigoAbreviacion: campo.get('codigo_abreviacion')?.value,
-      Valor: campo.get('valor')?.value
+    const camposExistentes = this.camposDinamicos.controls.map(campo => ({
+      IdCampo: campo.get('idCampo')?.value,
+      Valor: campo.get('valor')?.value,
+      Existente: true
     }));
     return{
       EspacioFisico:{
-        Nombre: formValues.nombre,
+        Nombre: formValues.nombre.toUpperCase(),
         Descripcion: formValues.descripcion,
         CodigoAbreviacion: formValues.codigo_abreviacion
       },
@@ -149,7 +139,7 @@ export class RegistroEspaciosComponent implements OnInit {
       DependenciaPadre: formValues.dependencia_padre?.id,
       TipoEdificacion: formValues.tipo_edificacion || 0,
       TipoTerreno: formValues.tipo_terreno || 0,
-      CamposDinamicos: camposDinamicos
+      camposExistentes: camposExistentes
     }
   }
 
@@ -157,7 +147,6 @@ export class RegistroEspaciosComponent implements OnInit {
     this.popUpManager.showConfirmAlert(this.translate.instant('CONFIRMACION.REGISTRAR.PREGUNTA'),this.translate.instant('CONFIRMACION.REGISTRAR.CONFIRMAR'),this.translate.instant('CONFIRMACION.REGISTRAR.DENEGAR')).then((result) =>{
       if (result === true){
         const registro = this.construirObjetoRegistro();
-        console.log(registro);
         this.popUpManager.showLoaderAlert(this.translate.instant('CARGA.REGISTRO'));
         this.oikosMidService.post("gestion_espacios_fisicos_mid/RegistroEspacioFisico", registro).pipe(
           tap((res: any) => {

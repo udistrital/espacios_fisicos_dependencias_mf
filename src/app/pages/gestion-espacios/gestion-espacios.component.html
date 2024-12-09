@@ -103,10 +103,10 @@
                           </mat-icon>
                         </div>
                         <div class="boton-acciones" *ngIf="element.estado === 'NO ACTIVA'">
-                          <mat-icon class="icono-rojo"  >{{ "ACCIONES.ACEPTAR" | translate }}<span class="tooltip tooltip-bottom">{{ "TOOLTIP.ACCIONES.ACTIVAR" | translate }}</span></mat-icon>
+                          <mat-icon class="icono-rojo" (click)="activarDependenciaComprobacion(element)" >{{ "ACCIONES.ACEPTAR" | translate }}<span class="tooltip tooltip-bottom">{{ "TOOLTIP.ACCIONES.ACTIVAR" | translate }}</span></mat-icon>
                         </div>
                         <div class="boton-acciones" *ngIf="element.estado === 'ACTIVA'">
-                          <mat-icon class="icono-rojo" >{{ "ACCIONES.CANCELAR" | translate }}<span class="tooltip tooltip-bottom">{{ "TOOLTIP.ACCIONES.DESACTIVAR" | translate }}</span></mat-icon>
+                          <mat-icon class="icono-rojo" (click)="desactivarDependenciaComprobacion(element)" >{{ "ACCIONES.CANCELAR" | translate }}<span class="tooltip tooltip-bottom">{{ "TOOLTIP.ACCIONES.DESACTIVAR" | translate }}</span></mat-icon>
                         </div>
                       </span>
                     </td>

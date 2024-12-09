@@ -192,16 +192,6 @@ export class EditarEspacioDialogComponent implements OnInit {
       }
     });
   }
-
-  agregarCampo() {
-    const nuevoCampo = new FormGroup({
-      nombre_campo: new FormControl('', Validators.required),
-      descripcion: new FormControl('', Validators.required),
-      codigo_abreviacion: new FormControl(''),
-      valor: new FormControl('', Validators.required),
-    });
-    this.camposDinamicos.push(nuevoCampo);
-  }
   
   agregarCampoExistente(campo: Campo) {
     const existeCampo = this.camposDinamicos.controls.some((control: AbstractControl) => {

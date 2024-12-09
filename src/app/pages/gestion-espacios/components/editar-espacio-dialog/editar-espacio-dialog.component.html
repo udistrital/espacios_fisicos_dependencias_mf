@@ -77,10 +77,6 @@
                         </button>
                     
                         <div class="contenedor-input-boton">
-                            <p class="nombre-input">{{ "FORMULARIO.CAMPOS" | translate }}</p>
-                            <button class="boton-nuevo-campo" *ngIf="tipo === 'EDITAR'" (click)="agregarCampo()">
-                                {{ "FORMULARIO.AGREGAR_NUEVO_CAMPO" | translate }}
-                            </button>
                             <button class="boton-nuevo-campo" *ngIf="tipo === 'EDITAR'" (click)="mostrarSelectorDeCampos()">
                                 {{ "FORMULARIO.AGREGAR_CAMPO_EXISTENTE" | translate }}
                             </button>
