@@ -100,20 +100,19 @@
         "BUSQUEDA": "Datos cargados con éxito",
         "EDITAR": "Espacio físico editado",
         "REGISTRAR":"Espacio Físico creado",
-        "ACTIVAR":"Dependencia activada",
-        "DESACTIVAR":"Dependencia desactivada"
+        "ACTIVAR":"Espacio Físico activado",
+        "DESACTIVAR":"Espacio Físico desactivado"
     },
     "ERROR":{
         "BUSQUEDA":{
-            "DATOS":"Error al buscar dependencias: Datos no disponibles",
-            "BUSQUEDA":"Error al buscar dependencias: "
+            "DATOS":"Error al buscar espacios físicos: Datos no disponibles",
+            "BUSQUEDA":"Error al buscar espacios físicos: "
         },
         "DESCONOCIDO":"Error desconocido",
-        "EDITAR": "Error al editar la dependencia",
-        "ORGANIGRAMA":"Error al cargar los datos del organigrama",
+        "EDITAR": "Error al editar el espacio físico",
         "REGISTRAR":"Error al crear el espacio físico",
-        "ACTIVAR":"Error al activar la dependencia",
-        "DESACTIVAR":"Error al desactivar la dependencia"
+        "ACTIVAR":"Error al activar el espacio físico",
+        "DESACTIVAR":"Error al desactivar el espacio físico"
     },
     "ACCIONES": {
       "EDITAR": "edit",
@@ -126,8 +125,8 @@
     "CARGA":{
       "REGISTRO":"Creando Espacio Físico...",
       "BUSQUEDA":"Obteniendo datos...",
-      "ACTIVAR":"Activando Dependencia...",
-      "DESACTIVAR":"Desactivando Dependencia...",
+      "ACTIVAR":"Activando el espacio físico...",
+      "DESACTIVAR":"Desactivando el espacio físico...",
       "EDITAR":"Editando datos..."
     },
     "CONFIRMACION":{
@@ -137,12 +136,12 @@
         "DENEGAR":"NO REGISTRAR"
       },
       "ACTIVAR":{
-        "PREGUNTA":"¿Desea activar la dependencia?",
+        "PREGUNTA":"¿Desea activar el espacio físico?",
         "CONFIRMAR":"ACTIVAR",
         "DENEGAR":"NO ACTIVAR"
       },
       "DESACTIVAR":{
-        "PREGUNTA":"¿Desea desactivar la dependencia?",
+        "PREGUNTA":"¿Desea desactivar el espacio físico?",
         "CONFIRMAR":"DESACTIVAR",
         "DENEGAR":"NO DESACTIVAR"
       },
