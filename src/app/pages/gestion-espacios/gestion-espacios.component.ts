@@ -29,7 +29,6 @@ export class GestionEspaciosComponent implements OnInit, AfterViewInit {
   dependencias: Desplegables[] = [];
   columnasBusqueda = signal<string[]>(["NOMBRE","COD_ABREVIACIÓN","DESCRIPCIÓN","ESTADO","TIPO ESPACIO FÍSICO", "TIPO USO", "ACCIONES"]);
   elementosBusqueda: BusquedaGestion[] = []
-  
 
   datos = new MatTableDataSource<BusquedaGestion>();
   gestionForm !:  FormGroup;
@@ -111,7 +110,7 @@ export class GestionEspaciosComponent implements OnInit, AfterViewInit {
   //   this.datos = new MatTableDataSource<BusquedaGestion>(this.elementosBusqueda);
   //   setTimeout(() => { this.datos.paginator = this.paginator; }, 1000);
   //   this.popUpManager.showSuccessAlert(this.translate.instant('EXITO.BUSQUEDA'));
-  //   this.mostrarTabla = true;  
+  //   this.mostrarTabla = true;
   //   console.log(this.datos);
   // }
 
@@ -164,9 +163,7 @@ export class GestionEspaciosComponent implements OnInit, AfterViewInit {
 
     if (this.gestionForm.value.estado) {
       if ( this.gestionForm.value.estado != '...'){
-        busqueda.BusquedaEstado = {
-          Estado: this.gestionForm.value.estado === "ACTIVO"
-        };
+        busqueda.Estado = this.gestionForm.value.estado === "ACTIVO";
       }
     }
     return busqueda;
@@ -181,16 +178,11 @@ export class GestionEspaciosComponent implements OnInit, AfterViewInit {
         this.procesarResultados(resultadosParciales);
       });
     } else {
-      
       const busquedaActiva = {
-        BusquedaEstado:{
-          Estado: true
-        }
+        Estado: true
       };
       const busquedaInactiva = {
-        BusquedaEstado:{
-          Estado: false
-        }
+        Estado: false
       };
       this.busqueda(busquedaActiva).then((resultadosActivos) => {
       this.busqueda(busquedaInactiva).then((resultadosInactivos) => {
@@ -199,7 +191,7 @@ export class GestionEspaciosComponent implements OnInit, AfterViewInit {
       });
       });
     }
-      
+
   }
 
   procesarResultados(resultados: any[]) {
@@ -207,17 +199,17 @@ export class GestionEspaciosComponent implements OnInit, AfterViewInit {
       this.datos = new MatTableDataSource<BusquedaGestion>(resultados);
       setTimeout(() => { this.datos.paginator = this.paginator; }, 1000);
       this.popUpManager.showSuccessAlert(this.translate.instant('EXITO.BUSQUEDA'));
-      this.mostrarTabla = true;  
+      this.mostrarTabla = true;
     } else {
       this.popUpManager.showErrorAlert(this.translate.instant('ERROR.BUSQUEDA.DATOS'));
       this.mostrarTabla = false;
     }
   }
-  
+
   busqueda(busqueda: any = {}): Promise<any[]>{
     this.popUpManager.showLoaderAlert(this.translate.instant('CARGA.BUSQUEDA'));
 
-    return this.oikosMidService.post("gestion_espacios_fisicos_mid/BuscarEspacioFisico", busqueda).pipe(
+    return this.oikosService.post("espacio_fisico/buscar_espacio_fisico", busqueda).pipe(
       map((res: any) => {
         if (res && res.Data) {
           return res.Data.map((item: any) => ({
@@ -274,7 +266,7 @@ export class GestionEspaciosComponent implements OnInit, AfterViewInit {
   async activarEspacio(element: any) {
     this.popUpManager.showLoaderAlert(this.translate.instant('CARGA.ACTIVAR'));
     try {
-      const response: any = await this.oikosMidService.put("gestion_espacios_fisicos_mid/ActivarEspacioFisico", element).toPromise();
+      const response: any = await this.oikosMidService.put("espacios_fisicos_mid/ActivarEspacioFisico", element).toPromise();
       console.log(response)
       if (response) {
         Swal.close();
@@ -298,7 +290,7 @@ export class GestionEspaciosComponent implements OnInit, AfterViewInit {
   async desactivarEspacio(element: any) {
     this.popUpManager.showLoaderAlert(this.translate.instant('CARGA.DESACTIVAR'));
     try {
-      const response: any = await this.oikosMidService.put("gestion_espacios_fisicos_mid/DesactivarEspacioFisico", element).toPromise();
+      const response: any = await this.oikosMidService.put("espacios_fisicos_mid/DesactivarEspacioFisico", element).toPromise();
       if (response) {
         Swal.close();
         this.popUpManager.showSuccessAlert(this.translate.instant('EXITO.DESACTIVAR'));

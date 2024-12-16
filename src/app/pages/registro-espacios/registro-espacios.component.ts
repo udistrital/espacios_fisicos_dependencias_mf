@@ -148,7 +148,7 @@ export class RegistroEspaciosComponent implements OnInit {
       if (result === true){
         const registro = this.construirObjetoRegistro();
         this.popUpManager.showLoaderAlert(this.translate.instant('CARGA.REGISTRO'));
-        this.oikosMidService.post("gestion_espacios_fisicos_mid/RegistroEspacioFisico", registro).pipe(
+        this.oikosMidService.post("espacios_fisicos_mid/RegistroEspacioFisico", registro).pipe(
           tap((res: any) => {
               if (res.Success) {
                   Swal.close();
