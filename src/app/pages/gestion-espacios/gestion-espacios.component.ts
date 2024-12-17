@@ -14,6 +14,7 @@ import { catchError, tap, map } from 'rxjs/operators';
 // @ts-ignore
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { EditarDetalles } from 'src/app/models/editarDetalles.models';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-gestion-espacios',
@@ -172,9 +173,8 @@ export class GestionEspaciosComponent implements OnInit, AfterViewInit {
   buscarEspacios() {
 
     const busqueda = this.construirBusqueda();
-    console.log(busqueda)
     if (Object.keys(busqueda).length !== 0) {
-      this.busqueda(busqueda).then((resultadosParciales) => {
+      this.busqueda(busqueda).subscribe((resultadosParciales) => {
         this.procesarResultados(resultadosParciales);
       });
     } else {
@@ -184,8 +184,8 @@ export class GestionEspaciosComponent implements OnInit, AfterViewInit {
       const busquedaInactiva = {
         Estado: false
       };
-      this.busqueda(busquedaActiva).then((resultadosActivos) => {
-      this.busqueda(busquedaInactiva).then((resultadosInactivos) => {
+      this.busqueda(busquedaActiva).subscribe((resultadosActivos) => {
+      this.busqueda(busquedaInactiva).subscribe((resultadosInactivos) => {
         const resultadosTotales = [...resultadosActivos, ...resultadosInactivos];
         this.procesarResultados(resultadosTotales);
       });
@@ -206,27 +206,30 @@ export class GestionEspaciosComponent implements OnInit, AfterViewInit {
     }
   }
 
-  busqueda(busqueda: any = {}): Promise<any[]>{
+  busqueda(busqueda: any = {}): Observable<any[]>{
     this.popUpManager.showLoaderAlert(this.translate.instant('CARGA.BUSQUEDA'));
 
     return this.oikosService.post("espacio_fisico/buscar_espacio_fisico", busqueda).pipe(
       map((res: any) => {
-        if (res && res.Data) {
-          return res.Data.map((item: any) => ({
+        if (res && res.length > 0) {
+          return res.map((item: any) => ({
             id: item.EspacioFisico.Id,
             nombre: item.EspacioFisico.Nombre,
             cod_abreviacion: item.EspacioFisico.CodigoAbreviacion,
             descripcion: item.EspacioFisico.Descripcion,
             tipoEdificacion: "",
             tipoTerreno: "",
-            tipoEspacio: item.TipoEspacioFisico ? {
-              id: item.TipoEspacioFisico.Id,
-              nombre: item.TipoEspacioFisico.Nombre
+            tipoEspacio: item.EspacioFisico.TipoEspacioFisicoId ? {
+              id: item.EspacioFisico.TipoEspacioFisicoId.Id,
+              nombre: item.EspacioFisico.TipoEspacioFisicoId.Nombre
             }: null,
-            tipoUso: item.TipoUso ? {
-              id: item.TipoUso.Id,
-              nombre: item.TipoUso.Nombre
-            }: null,
+            tipoUso: item.TiposUso[0] ? {
+              id: item.TiposUso[0].TipoUsoId.Id,
+              nombre: item.TiposUso[0].TipoUsoId.Nombre
+            }: {
+              id: null,
+              nombre: 'NO APLICA'
+            },
             estado: item.EspacioFisico.Activo ? 'ACTIVA' : 'NO ACTIVA',
           }));
         } else {
@@ -235,10 +238,13 @@ export class GestionEspaciosComponent implements OnInit, AfterViewInit {
       }),
       catchError((error) => {
         Swal.close();
-        this.popUpManager.showErrorAlert(this.translate.instant('ERROR.BUSQUEDA.BUSQUEDA') + (error.message || this.translate.instant('ERROR.DESCONOCIDO')));
+        this.popUpManager.showErrorAlert(
+          this.translate.instant('ERROR.BUSQUEDA.BUSQUEDA') + 
+          (error.message || this.translate.instant('ERROR.DESCONOCIDO'))
+        );
         return []
       })
-    ).toPromise() as Promise<any[]>;
+    );
   }
 
   activarDependenciaComprobacion(element: any){
@@ -273,7 +279,7 @@ export class GestionEspaciosComponent implements OnInit, AfterViewInit {
         this.popUpManager.showSuccessAlert(this.translate.instant('EXITO.ACTIVAR'));
 
         const busqueda = this.construirBusqueda();
-        this.busqueda(busqueda).then((resultados) => {
+        this.busqueda(busqueda).subscribe((resultados) => {
           this.procesarResultados(resultados);
         });
       } else {
@@ -296,7 +302,7 @@ export class GestionEspaciosComponent implements OnInit, AfterViewInit {
         this.popUpManager.showSuccessAlert(this.translate.instant('EXITO.DESACTIVAR'));
 
         const busqueda = this.construirBusqueda();
-        this.busqueda(busqueda).then((resultados) => {
+        this.busqueda(busqueda).subscribe((resultados) => {
           this.procesarResultados(resultados);
         });
       } else {
