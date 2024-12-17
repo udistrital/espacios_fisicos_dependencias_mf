@@ -13,15 +13,15 @@ import { EditarDetalles } from 'src/app/models/editarDetalles.models';
 // @ts-ignore
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 @Component({
-  selector: 'app-historico-espacios',
-  templateUrl: './historico-espacios.component.html',
-  styleUrls: ['./historico-espacios.component.css']
+  selector: 'app-campos',
+  templateUrl: './campos.component.html',
+  styleUrls: ['./campos.component.css']
 })
-export class HistoricoEspaciosComponent  implements OnInit, AfterViewInit {
-  @Input('normalform') normalform: any;
+export class CamposComponent {
+@Input('normalform') normalform: any;
   mostrarTabla: boolean = false;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  columnasBusqueda = signal<string[]>(["NOMBRE","COD_ABREVIACIÓN","TIPO ESPACIO FÍSICO", "DEPENDENCIA ASOCIADA", "FECHA MODIFICACIÓN", "OBSERVACIONES"]);
+  columnasBusqueda = signal<string[]>(["NOMBRE","COD_ABREVIACIÓN","TIPO ESPACIO FÍSICO", "DEPENDENCIA ASOCIADA", "OBSERVACIONES"]);
   anios = signal<number[]>([]);
 
   datos = new MatTableDataSource<BusquedaHistorico>();
@@ -82,6 +82,8 @@ export class HistoricoEspaciosComponent  implements OnInit, AfterViewInit {
 
   buscarEspacios() {
     this.busqueda().then((resultadosParciales) => {
+      console.log("AAAAAAAAAAA")
+      console.log(resultadosParciales);
       this.procesarResultados(resultadosParciales);
     });
       
@@ -120,6 +122,7 @@ export class HistoricoEspaciosComponent  implements OnInit, AfterViewInit {
       map((res: any) => {
         console.log(res)
         if (res) {
+          console.log("kheeeee")
           return res.map((item: any) => ({
             id: item.EspacioFisicoId.Id || null,
             nombre: item.EspacioFisicoId.Nombre || '',
@@ -127,7 +130,6 @@ export class HistoricoEspaciosComponent  implements OnInit, AfterViewInit {
             tipoEspacio: item.EspacioFisicoId.TipoEspacioFisicoId.Nombre || '',
             dependenciaAsociada: item.DependenciaId.Nombre || '',
             descripcion: item.EspacioFisicoId.Descripcion || '',
-            fechaModificacion: item.FechaCreacion ? item.FechaCreacion.substring(0, 10) : '' 
           }));
         } else {
           return [];
@@ -155,16 +157,15 @@ export class HistoricoEspaciosComponent  implements OnInit, AfterViewInit {
     };
     datos.gestion = false;
 
-    const dialogRef = this.dialog.open(EditarEspacioDialogComponent, {
-      width: '70%',
-      height: 'auto',
-      maxHeight: '65vh',
-      data:{
-        tipo:tipo,
-        element:datos,
-        historico: true
-      }
-    });
+    // const dialogRef = this.dialog.open(EditarEspacioDialogComponent, {
+    //   width: '70%',
+    //   height: 'auto',
+    //   maxHeight: '65vh',
+    //   data:{
+    //     tipo:tipo,
+    //     element:datos,
+    //     historico: true
+    //   }
+    // });
   }
-
 }
