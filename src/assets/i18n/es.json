@@ -94,7 +94,8 @@
       "TIPO_ESPACIO":"TIPO ESPACIO FÍSICO",
       "TIPO_USO":"TIPO USO",
       "DEPENDENCIA_ASOCIADA":"DEPENDENCIA ASOCIADA",
-      "DETALLES":"DETALLES"
+      "DETALLES":"DETALLES",
+      "FECHA":"FECHA MODIFICACIÓN"
     },
     "EXITO": {
         "BUSQUEDA": "Datos cargados con éxito",

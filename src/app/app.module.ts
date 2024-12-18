@@ -25,6 +25,7 @@ import { MatTableModule } from '@angular/material/table';
 import { EditarEspacioDialogComponent } from './pages/gestion-espacios/components/editar-espacio-dialog/editar-espacio-dialog.component';
 import { HistoricoEspaciosComponent } from './pages/historico-espacios/historico-espacios.component';
 import { SeleccionarCampoDialogComponent } from './pages/gestion-espacios/components/editar-espacio-dialog/seleccionar-campo-dialog/seleccionar-campo-dialog.component';
+import { CamposComponent } from './pages/campos/campos.component';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -37,7 +38,8 @@ export function createTranslateLoader(http: HttpClient) {
     GestionEspaciosComponent,
     EditarEspacioDialogComponent,
     HistoricoEspaciosComponent,
-    SeleccionarCampoDialogComponent
+    SeleccionarCampoDialogComponent,
+    CamposComponent
   ],
   imports: [
     BrowserModule,

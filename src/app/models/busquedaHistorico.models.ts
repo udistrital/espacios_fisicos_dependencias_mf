@@ -6,4 +6,5 @@ export interface BusquedaHistorico {
     tipoEspacio: string;
     dependenciaAsociada: string;
     descripcion: string;
+    fechaModificacion: string;
 }
