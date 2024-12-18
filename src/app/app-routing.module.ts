@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { RegistroEspaciosComponent } from './pages/registro-espacios/registro-espacios.component';
 import { GestionEspaciosComponent } from './pages/gestion-espacios/gestion-espacios.component';
 import { HistoricoEspaciosComponent } from './pages/historico-espacios/historico-espacios.component';
+import { CamposComponent } from './pages/campos/campos.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
   {
     path: "historico-espacios",
     component: HistoricoEspaciosComponent
+  },
+  {
+    path: "campos",
+    component: CamposComponent
   },
   {
     path: "**",
