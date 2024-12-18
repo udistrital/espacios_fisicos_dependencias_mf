@@ -272,7 +272,7 @@ export class GestionEspaciosComponent implements OnInit, AfterViewInit {
   async activarEspacio(element: any) {
     this.popUpManager.showLoaderAlert(this.translate.instant('CARGA.ACTIVAR'));
     try {
-      const response: any = await this.oikosMidService.put("espacios_fisicos_mid/ActivarEspacioFisico", element).toPromise();
+      const response: any = await this.oikosMidService.put("ActivarEspacioFisico", element).toPromise();
       console.log(response)
       if (response) {
         Swal.close();
@@ -296,7 +296,7 @@ export class GestionEspaciosComponent implements OnInit, AfterViewInit {
   async desactivarEspacio(element: any) {
     this.popUpManager.showLoaderAlert(this.translate.instant('CARGA.DESACTIVAR'));
     try {
-      const response: any = await this.oikosMidService.put("espacios_fisicos_mid/DesactivarEspacioFisico", element).toPromise();
+      const response: any = await this.oikosMidService.put("DesactivarEspacioFisico", element).toPromise();
       if (response) {
         Swal.close();
         this.popUpManager.showSuccessAlert(this.translate.instant('EXITO.DESACTIVAR'));
