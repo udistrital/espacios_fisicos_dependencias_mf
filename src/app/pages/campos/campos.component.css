@@ -169,8 +169,23 @@ th.mat-sort-header-sorted {
     flex: 1;
 }
 
+.error {
+    color: red;
+    font-size: 12px;
+}
+
+.btn-enabled {
+    cursor: pointer;
+}
+
+.btn-disabled {
+    background-color: #b3b3b3; 
+    cursor: not-allowed;
+}
+
 .descripcion-campo {
     flex: 2;
+    width: 50%; 
 }
 
 input, mat-select, select {

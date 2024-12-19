@@ -1,0 +1,37 @@
+
+<mat-card>
+    <div class="contenido-editar">
+        <mat-card-title class="titulo">{{ "GESTION.ESPACIO_FISICO" | translate }}</mat-card-title> 
+        <button class="boton-salir" (click)="onCloseClick()">x</button>
+    </div>
+    <mat-divider class="divider"></mat-divider>
+    <mat-card-content>
+        <form [formGroup]="editarCampoForm">
+            <div class="grid">
+              <div class="left-column">
+                <p class="nombre-input">{{ "FORMULARIO.NOMBRE_CAMPO" | translate }}</p>
+                <input type="text" formControlName="nombreCampo">
+                <div class="error" *ngIf="editarCampoForm.get('nombreCampo')?.invalid">
+                  {{ "* Campo obligatorio" | translate }}
+                </div>
+                <p class="nombre-input">{{ "FORMULARIO.CODIGO_ABREVIACION" | translate }}<button class="boton-ayuda">?   
+                  <span class="tooltip tooltip-right">
+                      <p>{{ "TOOLTIP.ANIO.PARTE_1" | translate }}</p>
+                  </span></button> 
+                </p>                
+                <input type="text" formControlName="cod_abreviacion">
+              </div>
+              <div class="right-column">
+                <p class="nombre-input">{{ "FORMULARIO.DESCRIPCION" | translate }}</p>
+                <textarea formControlName="descripcion" rows="4" class="descripcion-input" ></textarea>
+                <div class="error" *ngIf="editarCampoForm.get('descripcion')?.invalid">
+                  {{ "* Campo obligatorio" | translate }}
+                </div>
+                <br>
+                <button class="boton-accion" [disabled]="!editarCampoForm.valid" 
+                        [ngClass]="{'btn-disabled': !editarCampoForm.valid, 'btn-enabled': editarCampoForm.valid}">{{ "FORMULARIO.CREAR_CAMPO" | translate }}</button>                    
+              </div>
+            </div>
+          </form>
+    </mat-card-content>
+</mat-card>
