@@ -127,7 +127,7 @@ export class HistoricoEspaciosComponent  implements OnInit, AfterViewInit {
             tipoEspacio: item.EspacioFisicoId.TipoEspacioFisicoId.Nombre || '',
             dependenciaAsociada: item.DependenciaId.Nombre || '',
             descripcion: item.EspacioFisicoId.Descripcion || '',
-            fechaModificacion: item.FechaCreacion ? item.FechaCreacion.substring(0, 10) : '' 
+            fechaModificacion: item.FechaCreacion ? item.FechaCreacion.split('T')[0] : ''
           }));
         } else {
           return [];

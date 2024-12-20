@@ -4,6 +4,11 @@
       "SUBTITULO": "BUSCAR ESPACIO FÍSICO",
       "ESPACIO_FISICO": "ESPACIO FÍSICO"
     },
+    "CAMPOS":{
+      "TITULO":"GESTIÓN DE CAMPOS",
+      "SUBTITULO":"CREAR CAMPOS",
+      "EDITAR":"EDITAR CAMPO"
+    },
     "HISTORICO":{
       "TITULO": "HISTÓRICOS ESPACIOS FÍSICOS",
       "SUBTITULO": "BUSCAR ESPACIO FÍSICO",
@@ -48,6 +53,11 @@
         "DESACTIVAR": "Desactivar Espacio",
         "DETALLES": "Ver Detalles"
       },
+      "ACCIONES_CAMPO":{
+        "EDITAR": "Editar Campo",
+        "ACTIVAR": "Activar Campo",
+        "DESACTIVAR": "Desactivar Campo"
+      },
       "ANIO":{
         "PARTE_1": "• Espacio para colocar los años, se pueden colocar varios años."
       }
@@ -77,7 +87,9 @@
       "ESTADO_OPCIONES": {
         "ACTIVO": "ACTIVO",
         "NO_ACTIVO": "NO ACTIVO"
-      }
+      },
+      "CREAR_CAMPO": "CREAR CAMPO",
+      "EDITAR_CAMPO": "EDITAR CAMPO"
     },
     "TABLA_GESTION":{
       "NOMBRE":"NOMBRE",
@@ -86,6 +98,13 @@
       "ESTADO":"ESTADO",
       "TIPO_ESPACIO":"TIPO ESPACIO FÍSICO",
       "TIPO_USO":"TIPO USO",
+      "ACCIONES":"ACCIONES"
+    },
+    "TABLA_CAMPO":{
+      "NOMBRE":"NOMBRE CAMPO",
+      "CODIGO_ABREVIACION":"COD_ABREVIACIÓN",
+      "DESCRIPCION":"DESCRIPCIÓN",
+      "ESTADO":"ESTADO",
       "ACCIONES":"ACCIONES"
     },
     "TABLA_HISTORICO":{
@@ -102,7 +121,11 @@
         "EDITAR": "Espacio físico editado",
         "REGISTRAR":"Espacio Físico creado",
         "ACTIVAR":"Espacio Físico activado",
-        "DESACTIVAR":"Espacio Físico desactivado"
+        "DESACTIVAR":"Espacio Físico desactivado",
+        "REGISTRAR_CAMPO":"Campo registrado con éxito",
+        "EDITAR_CAMPO":"Campo editado con éxito",
+        "ACTIVAR_CAMPO":"Campo activado con éxito",
+        "DESACTIVAR_CAMPO":"Campo desactivado con éxito"
     },
     "ERROR":{
         "BUSQUEDA":{
@@ -113,7 +136,11 @@
         "EDITAR": "Error al editar el espacio físico",
         "REGISTRAR":"Error al crear el espacio físico",
         "ACTIVAR":"Error al activar el espacio físico",
-        "DESACTIVAR":"Error al desactivar el espacio físico"
+        "DESACTIVAR":"Error al desactivar el espacio físico",
+        "REGISTRAR_CAMPO":"Error al registrar el campo",
+        "EDITAR_CAMPO":"Error al editar el campo",
+        "ACTIVAR_CAMPO":"Error al activar el campo",
+        "DESACTIVAR_CAMPO":"Error al desactivar el campo"
     },
     "ACCIONES": {
       "EDITAR": "edit",
@@ -128,7 +155,12 @@
       "BUSQUEDA":"Obteniendo datos...",
       "ACTIVAR":"Activando el espacio físico...",
       "DESACTIVAR":"Desactivando el espacio físico...",
-      "EDITAR":"Editando datos..."
+      "EDITAR":"Editando datos...",
+      "REGISTRO_CAMPO":"Creando el Campo",
+      "EDITAR_CAMPO":"Editando campo...",
+      "ACTIVAR_CAMPO":"Activando el campo...",
+      "DESACTIVAR_CAMPO":"Desactivando el campo",
+      "BUSQUEDA_CAMPOS":"Obteniendo datos de los campos"
     },
     "CONFIRMACION":{
       "REGISTRAR":{
@@ -150,6 +182,21 @@
         "PREGUNTA":"¿Desea editar el espacio físico?",
         "CONFIRMAR":"EDITAR",
         "DENEGAR":"NO EDITAR"
+      },
+      "EDITAR_CAMPO":{
+        "PREGUNTA":"¿Desea editar el campo?",
+        "CONFIRMAR":"EDITAR",
+        "DENEGAR":"NO EDITAR"
+      },
+      "ACTIVAR_CAMPO":{
+        "PREGUNTA":"¿Desea activar el campo?",
+        "CONFIRMAR":"ACTIVAR",
+        "DENEGAR":"NO ACTIVAR"
+      },
+      "DESACTIVAR_CAMPO":{
+        "PREGUNTA":"¿Desea desactivar el campo?",
+        "CONFIRMAR":"DESACTIVAR",
+        "DENEGAR":"NO DESACTIVAR"
       },
       "CANCELAR":"CANCELAR",
       "DENEGACION":"Los cambios no fueron guardados"

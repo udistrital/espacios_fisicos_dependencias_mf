@@ -26,6 +26,7 @@ import { EditarEspacioDialogComponent } from './pages/gestion-espacios/component
 import { HistoricoEspaciosComponent } from './pages/historico-espacios/historico-espacios.component';
 import { SeleccionarCampoDialogComponent } from './pages/gestion-espacios/components/editar-espacio-dialog/seleccionar-campo-dialog/seleccionar-campo-dialog.component';
 import { CamposComponent } from './pages/campos/campos.component';
+import { EditarCampoDialogComponent } from './pages/campos/components/editar-campo-dialog/editar-campo-dialog.component';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -39,7 +40,8 @@ export function createTranslateLoader(http: HttpClient) {
     EditarEspacioDialogComponent,
     HistoricoEspaciosComponent,
     SeleccionarCampoDialogComponent,
-    CamposComponent
+    CamposComponent,
+    EditarCampoDialogComponent
   ],
   imports: [
     BrowserModule,
