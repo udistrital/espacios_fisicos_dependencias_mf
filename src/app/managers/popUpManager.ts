@@ -14,14 +14,19 @@ export class PopUpManager {
         translate.setDefaultLang('es');
     }
 
-    showSuccessAlert(text: string) {
+    showSuccessAlert(text: string, callback?: () => void) {
         Swal.fire({
             icon: this.translate.instant('POP_UP.ICONO.EXITO'),
             title: this.translate.instant('POP_UP.TITULO.EXITO'),
             text: text,
             confirmButtonText: this.translate.instant('POP_UP.CONFIRMACION'),
+        }).then(() => {
+            if (callback) {
+                callback(); 
+            }
         });
     }
+    
     showErrorAlert(text: string) {
         Swal.fire({
             icon: this.translate.instant('POP_UP.ICONO.ERROR'),
