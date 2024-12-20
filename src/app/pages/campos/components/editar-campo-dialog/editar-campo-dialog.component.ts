@@ -10,6 +10,8 @@ import { Output, EventEmitter } from '@angular/core';
 import { catchError, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { BusquedaCampo } from 'src/app/models/busquedaCampo.models';
+// @ts-ignore
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
   selector: 'app-editar-campo-dialog',
@@ -61,7 +63,54 @@ export class EditarCampoDialogComponent implements OnInit {
     this.editarCampoForm.get("cod_abreviacion")?.setValue(this.element.cod_abreviacion);
   }
 
- 
+  async editarCampo() {
+    try {
+        const result = await this.popUpManager.showConfirmAlert(
+            this.translate.instant('CONFIRMACION.EDITAR_CAMPO.PREGUNTA'),
+            this.translate.instant('CONFIRMACION.EDITAR_CAMPO.CONFIRMAR'),
+            this.translate.instant('CONFIRMACION.EDITAR_CAMPO.DENEGAR')
+        );
+
+        if (result) {
+            this.popUpManager.showLoaderAlert(this.translate.instant('CARGA.EDITAR_CAMPO'));
+            const formValues = this.editarCampoForm.value;
+            const campoModificado = {
+                Id: this.element.id,
+                Nombre: formValues.nombreCampo,
+                CodigoAbreviacion: formValues.cod_abreviacion,
+                Descripcion: formValues.descripcion,
+                FechaModificacion: new Date().toISOString(),
+                FechaCreacion: this.element.fechaCreacion,
+                Activo: this.element.estado === 'ACTIVA',
+            };
+
+            try {
+                const response: any = await this.oikosService.put("campo", campoModificado).toPromise();
+                
+                Swal.close();
+                if (response) {
+                    this.popUpManager.showSuccessAlert(
+                        this.translate.instant('EXITO.EDITAR_CAMPO'),
+                        () => this.dialogRef.close(true)
+                    );
+                } else {
+                    this.popUpManager.showErrorAlert(this.translate.instant('ERROR.EDITAR_CAMPO'));
+                }
+            } catch (error) {
+                Swal.close(); 
+                this.popUpManager.showErrorAlert(
+                    this.translate.instant('ERROR.EDITAR_CAMPO') +
+                    ": " +
+                    this.translate.instant('ERROR.DESCONOCIDO')
+                );
+            }
+        }
+    } catch (error) {
+        console.error("Error al mostrar el confirm popup:", error);
+    }
+  }
+
+
   onCloseClick() {
     this.dialogRef.close();
   }

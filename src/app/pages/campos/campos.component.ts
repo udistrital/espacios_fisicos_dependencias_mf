@@ -9,6 +9,8 @@ import { OikosService } from 'src/app/services/oikos.service';
 import { catchError, map, of } from 'rxjs';
 import { BusquedaCampo } from 'src/app/models/busquedaCampo.models';
 import { EditarCampoDialogComponent } from './components/editar-campo-dialog/editar-campo-dialog.component';
+// @ts-ignore
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 @Component({
   selector: 'app-campos',
   templateUrl: './campos.component.html',
@@ -80,6 +82,7 @@ export class CamposComponent implements OnInit, AfterViewInit {
               cod_abreviacion: item.CodigoAbreviacion || '',
               descripcion: item.Descripcion || '',
               estado: item.Activo ? 'ACTIVA' : 'NO ACTIVA',
+              fechaCreacion: item.FechaCreacion,
             }));
           } else {
             return [];
@@ -125,9 +128,13 @@ export class CamposComponent implements OnInit, AfterViewInit {
 
     this.oikosService.post('campo', campo).subscribe({
       next: (response) => {
-        this.popUpManager.showSuccessAlert(this.translate.instant('EXITO.REGISTRAR_CAMPO'));
-        this.campoForm.reset(); 
-        this.buscar();
+        this.popUpManager.showSuccessAlert(
+          this.translate.instant('EXITO.REGISTRAR_CAMPO'),
+            () => {
+                this.campoForm.reset(); 
+                this.buscar(); 
+            }
+        );
       },
       error: (error) => {
         console.error(error);
@@ -143,6 +150,92 @@ export class CamposComponent implements OnInit, AfterViewInit {
       maxHeight: '65vh',
       data:element
     });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.campoForm.reset();
+        this.buscar();
+      }
+    });
+  }
+
+  async activarCampo(element: BusquedaCampo){
+    try {
+      const result = await this.popUpManager.showConfirmAlert(
+          this.translate.instant('CONFIRMACION.ACTIVAR_CAMPO.PREGUNTA'),
+          this.translate.instant('CONFIRMACION.ACTIVAR_CAMPO.CONFIRMAR'),
+          this.translate.instant('CONFIRMACION.ACTIVAR_CAMPO.DENEGAR')
+      );
+      if (result) {
+        this.activarDesactivarCampo(true, element)
+      }
+    }catch (error) {
+      console.error("Error al mostrar el confirm popup:", error);
+    }
+  }
+
+  async desactivarCampo(element: BusquedaCampo){
+    try {
+      const result = await this.popUpManager.showConfirmAlert(
+          this.translate.instant('CONFIRMACION.DESACTIVAR_CAMPO.PREGUNTA'),
+          this.translate.instant('CONFIRMACION.DESACTIVAR_CAMPO.CONFIRMAR'),
+          this.translate.instant('CONFIRMACION.DESACTIVAR_CAMPO.DENEGAR')
+      );
+      if (result) {
+        this.activarDesactivarCampo(false, element)
+      }
+    }catch (error) {
+      console.error("Error al mostrar el confirm popup:", error);
+    }
+  }
+
+  async activarDesactivarCampo(estado: boolean, element: BusquedaCampo){
+    let carga, exito, error : string
+    if (estado){
+      carga = this.translate.instant('CARGA.ACTIVAR_CAMPO');
+      exito = this.translate.instant('EXITO.ACTIVAR_CAMPO');
+      error = this.translate.instant('ERROR.ACTIVAR_CAMPO');
+    }else{
+      carga = this.translate.instant('CARGA.DESACTIVAR_CAMPO');
+      exito = this.translate.instant('EXITO.DESACTIVAR_CAMPO');
+      error = this.translate.instant('ERROR.DESACTIVAR_CAMPO');
+    }
+    this.popUpManager.showLoaderAlert(carga);
+    const campoModificado = {
+        Id: element.id,
+        Nombre: element.nombre,
+        CodigoAbreviacion: element.cod_abreviacion,
+        Descripcion: element.descripcion,
+        FechaModificacion: new Date().toISOString(),
+        FechaCreacion: element.fechaCreacion,
+        Activo: estado,
+    };
+
+    try {
+        const response: any = await this.oikosService.put("campo", campoModificado).toPromise();
+        
+        Swal.close();
+        if (response) {
+            this.popUpManager.showSuccessAlert(
+                exito,
+                () => {
+                  this.campoForm.reset(); 
+                  this.buscar(); 
+                }
+            );
+        } else {
+            this.popUpManager.showErrorAlert(error);
+        }
+    } catch (error) {
+        Swal.close(); 
+        this.popUpManager.showErrorAlert(
+            error +
+            ": " +
+            this.translate.instant('ERROR.DESCONOCIDO')
+        );
+    }
   }
 
 }
+
+

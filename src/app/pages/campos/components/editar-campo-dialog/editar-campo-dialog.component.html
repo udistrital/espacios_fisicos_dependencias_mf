@@ -1,7 +1,7 @@
 
 <mat-card>
     <div class="contenido-editar">
-        <mat-card-title class="titulo">{{ "GESTION.ESPACIO_FISICO" | translate }}</mat-card-title> 
+        <mat-card-title class="titulo">{{ "CAMPOS.EDITAR" | translate }}</mat-card-title> 
         <button class="boton-salir" (click)="onCloseClick()">x</button>
     </div>
     <mat-divider class="divider"></mat-divider>
@@ -28,8 +28,8 @@
                   {{ "* Campo obligatorio" | translate }}
                 </div>
                 <br>
-                <button class="boton-accion" [disabled]="!editarCampoForm.valid" 
-                        [ngClass]="{'btn-disabled': !editarCampoForm.valid, 'btn-enabled': editarCampoForm.valid}">{{ "FORMULARIO.CREAR_CAMPO" | translate }}</button>                    
+                <button class="boton-accion" (click)="editarCampo()" [disabled]="!editarCampoForm.valid" 
+                        [ngClass]="{'btn-disabled': !editarCampoForm.valid, 'btn-enabled': editarCampoForm.valid}">{{ "FORMULARIO.EDITAR_CAMPO" | translate }}</button>                    
               </div>
             </div>
           </form>

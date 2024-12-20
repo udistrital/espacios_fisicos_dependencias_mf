@@ -6,7 +6,8 @@
     },
     "CAMPOS":{
       "TITULO":"GESTIÓN DE CAMPOS",
-      "SUBTITULO":"CREAR CAMPOS"
+      "SUBTITULO":"CREAR CAMPOS",
+      "EDITAR":"EDITAR CAMPO"
     },
     "HISTORICO":{
       "TITULO": "HISTÓRICOS ESPACIOS FÍSICOS",
@@ -87,7 +88,8 @@
         "ACTIVO": "ACTIVO",
         "NO_ACTIVO": "NO ACTIVO"
       },
-      "CREAR_CAMPO": "CREAR CAMPO"
+      "CREAR_CAMPO": "CREAR CAMPO",
+      "EDITAR_CAMPO": "EDITAR CAMPO"
     },
     "TABLA_GESTION":{
       "NOMBRE":"NOMBRE",
@@ -120,7 +122,10 @@
         "REGISTRAR":"Espacio Físico creado",
         "ACTIVAR":"Espacio Físico activado",
         "DESACTIVAR":"Espacio Físico desactivado",
-        "REGISTRAR_CAMPO":"Campo registrado con éxito"
+        "REGISTRAR_CAMPO":"Campo registrado con éxito",
+        "EDITAR_CAMPO":"Campo editado con éxito",
+        "ACTIVAR_CAMPO":"Campo activado con éxito",
+        "DESACTIVAR_CAMPO":"Campo desactivado con éxito"
     },
     "ERROR":{
         "BUSQUEDA":{
@@ -132,7 +137,10 @@
         "REGISTRAR":"Error al crear el espacio físico",
         "ACTIVAR":"Error al activar el espacio físico",
         "DESACTIVAR":"Error al desactivar el espacio físico",
-        "REGISTRAR_CAMPO":"Error al registrar el campo"
+        "REGISTRAR_CAMPO":"Error al registrar el campo",
+        "EDITAR_CAMPO":"Error al editar el campo",
+        "ACTIVAR_CAMPO":"Error al activar el campo",
+        "DESACTIVAR_CAMPO":"Error al desactivar el campo"
     },
     "ACCIONES": {
       "EDITAR": "edit",
@@ -148,7 +156,10 @@
       "ACTIVAR":"Activando el espacio físico...",
       "DESACTIVAR":"Desactivando el espacio físico...",
       "EDITAR":"Editando datos...",
-      "REGISTRO_CAMPO":"Creando el Campo"
+      "REGISTRO_CAMPO":"Creando el Campo",
+      "EDITAR_CAMPO":"Editando campo...",
+      "ACTIVAR_CAMPO":"Activando el campo...",
+      "DESACTIVAR_CAMPO":"Desactivando el campo"
     },
     "CONFIRMACION":{
       "REGISTRAR":{
@@ -170,6 +181,21 @@
         "PREGUNTA":"¿Desea editar el espacio físico?",
         "CONFIRMAR":"EDITAR",
         "DENEGAR":"NO EDITAR"
+      },
+      "EDITAR_CAMPO":{
+        "PREGUNTA":"¿Desea editar el campo?",
+        "CONFIRMAR":"EDITAR",
+        "DENEGAR":"NO EDITAR"
+      },
+      "ACTIVAR_CAMPO":{
+        "PREGUNTA":"¿Desea activar el campo?",
+        "CONFIRMAR":"ACTIVAR",
+        "DENEGAR":"NO ACTIVAR"
+      },
+      "DESACTIVAR_CAMPO":{
+        "PREGUNTA":"¿Desea desactivar el campo?",
+        "CONFIRMAR":"DESACTIVAR",
+        "DENEGAR":"NO DESACTIVAR"
       },
       "CANCELAR":"CANCELAR",
       "DENEGACION":"Los cambios no fueron guardados"

@@ -65,10 +65,10 @@
                           <mat-icon class="icono-rojo" >{{ "ACCIONES.EDITAR" | translate }}<span class="tooltip tooltip-bottom">{{ "TOOLTIP.ACCIONES_CAMPO.EDITAR" | translate }}</span>
                           </mat-icon>
                         </div>
-                        <div class="boton-acciones" *ngIf="element.estado === 'NO ACTIVA'">
+                        <div class="boton-acciones" *ngIf="element.estado === 'NO ACTIVA'" (click)="activarCampo(element)">
                           <mat-icon class="icono-rojo" >{{ "ACCIONES.ACEPTAR" | translate }}<span class="tooltip tooltip-bottom">{{ "TOOLTIP.ACCIONES_CAMPO.ACTIVAR" | translate }}</span></mat-icon>
                         </div>
-                        <div class="boton-acciones" *ngIf="element.estado === 'ACTIVA'">
+                        <div class="boton-acciones" *ngIf="element.estado === 'ACTIVA'" (click)="desactivarCampo(element)">
                           <mat-icon class="icono-rojo">{{ "ACCIONES.CANCELAR" | translate }}<span class="tooltip tooltip-bottom">{{ "TOOLTIP.ACCIONES_CAMPO.DESACTIVAR" | translate }}</span></mat-icon>
                         </div>
                       </span>

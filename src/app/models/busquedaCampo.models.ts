@@ -5,4 +5,5 @@ export interface BusquedaCampo {
     cod_abreviacion: string;
     descripcion: string;
     estado: string;
+    fechaCreacion: string;
 }
