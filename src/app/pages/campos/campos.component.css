@@ -120,6 +120,10 @@ th.mat-sort-header-sorted {
     color: black;
 }
 
+input[formControlName="cod_abreviacion"] {
+    text-transform: uppercase;
+}
+
 .icono-rojo{
     color: #8C1A18;
     font-weight: bold;

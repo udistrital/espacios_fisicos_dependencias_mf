@@ -16,6 +16,10 @@
     align-items: center;
 }
 
+input[formControlName="cod_abreviacion"] {
+    text-transform: uppercase;
+}
+
 .boton-salir {
     background-color: white;
     color: #8C1A18; 

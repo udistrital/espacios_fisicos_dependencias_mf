@@ -77,7 +77,7 @@ export class EditarCampoDialogComponent implements OnInit {
             const campoModificado = {
                 Id: this.element.id,
                 Nombre: formValues.nombreCampo,
-                CodigoAbreviacion: formValues.cod_abreviacion,
+                CodigoAbreviacion: formValues.cod_abreviacion.toUpperCase(),
                 Descripcion: formValues.descripcion,
                 FechaModificacion: new Date().toISOString(),
                 FechaCreacion: this.element.fechaCreacion,

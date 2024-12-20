@@ -18,11 +18,7 @@
                     <div class="error" *ngIf="campoForm.get('nombreCampo')?.invalid">
                       {{ "* Campo obligatorio" | translate }}
                     </div>
-                    <p class="nombre-input">{{ "FORMULARIO.CODIGO_ABREVIACION" | translate }}<button class="boton-ayuda">?   
-                      <span class="tooltip tooltip-right">
-                          <p>{{ "TOOLTIP.ANIO.PARTE_1" | translate }}</p>
-                      </span></button> 
-                    </p>                
+                    <p class="nombre-input">{{ "FORMULARIO.CODIGO_ABREVIACION" | translate }}</p>                
                     <input type="text" formControlName="cod_abreviacion">
                   </div>
                   <div class="right-column">

@@ -69,7 +69,7 @@ export class CamposComponent implements OnInit, AfterViewInit {
     this.mostrarTabla = false;
     this.datos.data = []; 
 
-    this.popUpManager.showLoaderAlert(this.translate.instant('CARGA.BUSQUEDA'));
+    this.popUpManager.showLoaderAlert(this.translate.instant('CARGA.BUSQUEDA_CAMPOS'));
 
     this.oikosService
       .get('campo')
@@ -119,7 +119,7 @@ export class CamposComponent implements OnInit, AfterViewInit {
 
     const campo = {
       Nombre: formValues.nombreCampo,
-      CodigoAbreviacion: formValues.cod_abreviacion?.trim() === '' ? null : formValues.cod_abreviacion,
+      CodigoAbreviacion: formValues.cod_abreviacion?.trim() === '' ? null : formValues.cod_abreviacion.toUpperCase(),
       Descripcion: formValues.descripcion,
       Activo: true,
       FechaCreacion: fechaActual,

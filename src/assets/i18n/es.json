@@ -159,7 +159,8 @@
       "REGISTRO_CAMPO":"Creando el Campo",
       "EDITAR_CAMPO":"Editando campo...",
       "ACTIVAR_CAMPO":"Activando el campo...",
-      "DESACTIVAR_CAMPO":"Desactivando el campo"
+      "DESACTIVAR_CAMPO":"Desactivando el campo",
+      "BUSQUEDA_CAMPOS":"Obteniendo datos de los campos"
     },
     "CONFIRMACION":{
       "REGISTRAR":{
