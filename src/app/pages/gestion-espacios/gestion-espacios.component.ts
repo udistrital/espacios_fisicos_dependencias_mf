@@ -147,7 +147,7 @@ export class GestionEspaciosComponent implements OnInit, AfterViewInit {
     const busqueda: any = {};
 
     if (this.gestionForm.value.nombre) {
-      busqueda.NombreEspacioFisico = this.gestionForm.value.nombre;
+      busqueda.NombreEspacioFisico = this.gestionForm.value.nombre.toUpperCase();
     }
 
     if (this.gestionForm.value.tipoUso?.id) {

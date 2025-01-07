@@ -39,6 +39,10 @@ input, mat-select, select {
     align-self: center;
 }
 
+input[formControlName="codigo_abreviacion"] {
+    text-transform: uppercase;
+}
+
 
 .contenedor-input-boton {
     display: flex;

@@ -132,7 +132,7 @@ export class RegistroEspaciosComponent implements OnInit {
       EspacioFisico:{
         Nombre: formValues.nombre.toUpperCase(),
         Descripcion: formValues.descripcion,
-        CodigoAbreviacion: formValues.codigo_abreviacion
+        CodigoAbreviacion: formValues.codigo_abreviacion.toUpperCase()
       },
       TipoEspacioFisico: formValues.tipo_espacio_fisico?.id,
       TipoUso: formValues.tipo_uso?.id,
