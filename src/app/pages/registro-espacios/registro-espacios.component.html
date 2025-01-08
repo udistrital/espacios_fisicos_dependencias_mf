@@ -20,13 +20,15 @@
                                             </span>
                                         </button> 
                                     </p>
-                                    <input type="text" formControlName="nombre">
-                                    <div class="error" *ngIf="registroForm.get('nombre')?.invalid">
-                                        {{ "* Campo obligatorio" | translate }}
+                                    <div class="espacio-nombre">
+                                        <input type="text" formControlName="nombre">
+                                        <div class="error" *ngIf="registroForm.get('nombre')?.invalid">
+                                            {{ "* Campo obligatorio" | translate }}
+                                        </div>
                                     </div>
                                     <p class="nombre-input">{{ "FORMULARIO.CODIGO_ABREVIACION" | translate }}</p>
                                     <input type="text" formControlName="codigo_abreviacion">
-                                    <div class="error" *ngIf="registroForm.get('codigo_abreviacion')?.errors?.['required']">
+                                    <div class="error" *ngIf="registroForm.get('codigo_abreviacion')?.invalid">
                                         {{ "* Campo obligatorio" | translate }}
                                     </div>
                                     <p class="nombre-input">{{ "FORMULARIO.DEPENDENCIA_PADRE" | translate }}
@@ -141,7 +143,7 @@
                                         <div class="campo valor-campo">
                                             <p class="nombre-input">{{ "FORMULARIO.VALOR" | translate }}</p>
                                             <input type="text" formControlName="valor"  [readonly]="campo.disabled">
-                                            <div class="error" *ngIf="campo.get('valor')?.errors?.['required']"> 
+                                            <div class="error" *ngIf="campo.get('valor')?.invalid"> 
                                                 {{ "* Campo obligatorio" | translate }}
                                             </div>
                                         </div>

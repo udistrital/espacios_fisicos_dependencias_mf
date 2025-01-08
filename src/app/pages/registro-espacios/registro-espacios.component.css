@@ -62,8 +62,12 @@ input, mat-select, select {
     height: 60px;
 }
 
-.left-column input[formControlName="nombre"] {
-    margin-bottom: 45px;
+.espacio-nombre {
+    margin-bottom: 21px;
+}
+
+input[formControlName="valor"], input[formControlName="codigo_abreviacion"]{
+    text-transform: uppercase;
 }
 
 .error {
