@@ -170,7 +170,7 @@ export class RegistroEspaciosComponent implements OnInit {
   }
 
   cargarCamposExistentes() {
-    this.oikosService.get('campo?limit=-1').subscribe((res: any) => {
+    this.oikosService.get('campo?limit=-1&query=Activo:true').subscribe((res: any) => {
       if (res && res.length > 0) {
         this.camposExistentes = res.map((campo: any) => ({
           idCampo: campo.Id,
