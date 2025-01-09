@@ -89,6 +89,9 @@
                                             </div>
                                             <p class="nombre-input">{{ "FORMULARIO.TIPO_EDIFICACION" | translate }}</p>
                                             <input type="number" formControlName="tipo_edificacion">
+                                            <div class="error" *ngIf="registroForm.get('tipo_edificacion')?.invalid">
+                                                {{ "* El tipo edificación debe ser positivo" | translate }}
+                                            </div>
                                         </div>
                                         <div class="column">
                                             <p class="nombre-input">{{ "FORMULARIO.TIPO_USO" | translate }}</p>
@@ -103,6 +106,9 @@
                                             </div>
                                             <p class="nombre-input">{{ "FORMULARIO.TIPO_TERRENO" | translate }}</p>
                                             <input type="number" formControlName="tipo_terreno">
+                                            <div class="error" *ngIf="registroForm.get('tipo_terreno')?.invalid">
+                                                {{ "* El tipo terreno debe ser positivo" | translate }}
+                                            </div>
                                         </div>
                                     </div>
                                     <button class="boton-accion" [disabled]="!registroForm.valid" (click)="enviarEspacioFisico()"

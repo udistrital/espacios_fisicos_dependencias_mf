@@ -77,13 +77,13 @@ export class RegistroEspaciosComponent implements OnInit {
         nonNullable: true,
         validators: [Validators.required],
       }),
-      tipo_edificacion: new FormControl<string | null>("", {
+      tipo_edificacion: new FormControl<number | null>(null, {
         nonNullable: true,
-        validators: [],
+        validators: [Validators.min(0)],
       }),
-      tipo_terreno: new FormControl<string | null>("", {
+      tipo_terreno: new FormControl<number | null>(null, {
         nonNullable: true,
-        validators: [],
+        validators: [Validators.min(0)],
       }),
       camposDinamicos: new FormArray([])
     });

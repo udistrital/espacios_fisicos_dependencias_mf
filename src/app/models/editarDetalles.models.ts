@@ -8,8 +8,8 @@ export interface EditarDetalles {
     tipoEspacio: Desplegables;
     descripcion: string;
     tipoUso: Desplegables;
-    tipoEdificacion: string;
-    tipoTerreno: string;
+    tipoEdificacion: number;
+    tipoTerreno: number;
     dependenciaPadre: Desplegables;
     campos: Campo[];
     gestion: boolean;

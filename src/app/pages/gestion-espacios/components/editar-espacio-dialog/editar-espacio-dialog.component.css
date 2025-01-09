@@ -186,7 +186,14 @@ textarea {
     text-align: center; 
     align-items: center;
     display: block; 
-    margin: 0 auto;
     box-sizing: border-box; 
     width: 100%; 
+}
+
+.espacio-nombre {
+    margin-bottom: 60px;
+}
+
+input[formControlName="valor"], input[formControlName="codigo_abreviacion"]{
+    text-transform: uppercase;
 }
