@@ -54,12 +54,12 @@ export class RegistroEspaciosComponent implements OnInit {
   iniciarFormularioConsulta() {
     this.registroForm = new FormGroup({
       nombre: new FormControl<string | null>("", {
-        nonNullable: false,
-        validators: [Validators.required]
+        nonNullable: true,
+        validators: [Validators.required, Validators.pattern(/^\S.*$/)]
       }),
       codigo_abreviacion: new FormControl<string | null>("", {
         nonNullable: true,
-        validators: [Validators.required]
+        validators: [Validators.required, Validators.pattern(/^\S.*$/)]
       }),
       dependencia_padre: new FormControl<Desplegables | null>(null, {
         nonNullable: true,
@@ -67,7 +67,7 @@ export class RegistroEspaciosComponent implements OnInit {
       }),
       descripcion: new FormControl<string | null>("", {
         nonNullable: true,
-        validators: [Validators.required],
+        validators: [Validators.required, Validators.pattern(/^\S.*$/)],
       }),
       tipo_espacio_fisico: new FormControl<Desplegables | null>(null, {
         nonNullable: true,
@@ -77,13 +77,13 @@ export class RegistroEspaciosComponent implements OnInit {
         nonNullable: true,
         validators: [Validators.required],
       }),
-      tipo_edificacion: new FormControl<string | null>("", {
+      tipo_edificacion: new FormControl<number | null>(null, {
         nonNullable: true,
-        validators: [],
+        validators: [Validators.min(0)],
       }),
-      tipo_terreno: new FormControl<string | null>("", {
+      tipo_terreno: new FormControl<number | null>(null, {
         nonNullable: true,
-        validators: [],
+        validators: [Validators.min(0)],
       }),
       camposDinamicos: new FormArray([])
     });
@@ -125,14 +125,14 @@ export class RegistroEspaciosComponent implements OnInit {
     const formValues = this.registroForm.value;
     const camposExistentes = this.camposDinamicos.controls.map(campo => ({
       IdCampo: campo.get('idCampo')?.value,
-      Valor: campo.get('valor')?.value,
+      Valor: campo.get('valor')?.value.toUpperCase(),
       Existente: true
     }));
     return{
       EspacioFisico:{
         Nombre: formValues.nombre.toUpperCase(),
         Descripcion: formValues.descripcion,
-        CodigoAbreviacion: formValues.codigo_abreviacion
+        CodigoAbreviacion: formValues.codigo_abreviacion.toUpperCase()
       },
       TipoEspacioFisico: formValues.tipo_espacio_fisico?.id,
       TipoUso: formValues.tipo_uso?.id,
@@ -170,7 +170,7 @@ export class RegistroEspaciosComponent implements OnInit {
   }
 
   cargarCamposExistentes() {
-    this.oikosService.get('campo?limit=-1').subscribe((res: any) => {
+    this.oikosService.get('campo?limit=-1&query=Activo:true').subscribe((res: any) => {
       if (res && res.length > 0) {
         this.camposExistentes = res.map((campo: any) => ({
           idCampo: campo.Id,
@@ -209,13 +209,11 @@ export class RegistroEspaciosComponent implements OnInit {
       nombre_campo: new FormControl({ value: campo.nombreCampo, disabled: true }),
       descripcion: new FormControl({ value: campo.descripcion, disabled: true }),
       codigo_abreviacion: new FormControl({ value: campo.codigoAbreviacion, disabled: true }),
-      valor: new FormControl('', Validators.required),
+      valor: new FormControl('', [Validators.required, Validators.pattern(/^\S.*$/)]),
     });
     this.camposDinamicos.push(campoNoEditable);
     console.log(campoNoEditable.get("idCampo")?.value)
   }
-
-  
 
   eliminarCampo(index: number) {
     this.camposDinamicos.removeAt(index);

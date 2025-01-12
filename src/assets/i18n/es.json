@@ -140,7 +140,8 @@
         "REGISTRAR_CAMPO":"Error al registrar el campo",
         "EDITAR_CAMPO":"Error al editar el campo",
         "ACTIVAR_CAMPO":"Error al activar el campo",
-        "DESACTIVAR_CAMPO":"Error al desactivar el campo"
+        "DESACTIVAR_CAMPO":"Error al desactivar el campo",
+        "CAMPO_DUPLICADO":"Error al crear campo: Campo con nombre duplicado"
     },
     "ACCIONES": {
       "EDITAR": "edit",

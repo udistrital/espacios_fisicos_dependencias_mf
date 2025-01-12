@@ -20,13 +20,15 @@
                                             </span>
                                         </button> 
                                     </p>
-                                    <input type="text" formControlName="nombre">
-                                    <div class="error" *ngIf="registroForm.get('nombre')?.invalid">
-                                        {{ "* Campo obligatorio" | translate }}
+                                    <div class="espacio-nombre">
+                                        <input type="text" formControlName="nombre">
+                                        <div class="error" *ngIf="registroForm.get('nombre')?.invalid">
+                                            {{ "* Campo obligatorio" | translate }}
+                                        </div>
                                     </div>
                                     <p class="nombre-input">{{ "FORMULARIO.CODIGO_ABREVIACION" | translate }}</p>
                                     <input type="text" formControlName="codigo_abreviacion">
-                                    <div class="error" *ngIf="registroForm.get('codigo_abreviacion')?.errors?.['required']">
+                                    <div class="error" *ngIf="registroForm.get('codigo_abreviacion')?.invalid">
                                         {{ "* Campo obligatorio" | translate }}
                                     </div>
                                     <p class="nombre-input">{{ "FORMULARIO.DEPENDENCIA_PADRE" | translate }}
@@ -87,6 +89,9 @@
                                             </div>
                                             <p class="nombre-input">{{ "FORMULARIO.TIPO_EDIFICACION" | translate }}</p>
                                             <input type="number" formControlName="tipo_edificacion">
+                                            <div class="error" *ngIf="registroForm.get('tipo_edificacion')?.invalid">
+                                                {{ "* El tipo edificación debe ser positivo" | translate }}
+                                            </div>
                                         </div>
                                         <div class="column">
                                             <p class="nombre-input">{{ "FORMULARIO.TIPO_USO" | translate }}</p>
@@ -101,6 +106,9 @@
                                             </div>
                                             <p class="nombre-input">{{ "FORMULARIO.TIPO_TERRENO" | translate }}</p>
                                             <input type="number" formControlName="tipo_terreno">
+                                            <div class="error" *ngIf="registroForm.get('tipo_terreno')?.invalid">
+                                                {{ "* El tipo terreno debe ser positivo" | translate }}
+                                            </div>
                                         </div>
                                     </div>
                                     <button class="boton-accion" [disabled]="!registroForm.valid" (click)="enviarEspacioFisico()"
@@ -141,7 +149,7 @@
                                         <div class="campo valor-campo">
                                             <p class="nombre-input">{{ "FORMULARIO.VALOR" | translate }}</p>
                                             <input type="text" formControlName="valor"  [readonly]="campo.disabled">
-                                            <div class="error" *ngIf="campo.get('valor')?.errors?.['required']"> 
+                                            <div class="error" *ngIf="campo.get('valor')?.invalid"> 
                                                 {{ "* Campo obligatorio" | translate }}
                                             </div>
                                         </div>
