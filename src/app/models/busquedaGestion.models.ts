@@ -9,8 +9,8 @@ export interface BusquedaGestion {
     estado: string;
     tipoEspacio: Desplegables;
     tipoUso: Desplegables;
-    tipoEdificacion: string;
-    tipoTerreno: string;
+    tipoEdificacion: number;
+    tipoTerreno: number;
     dependenciaPadre: Desplegables;
     campos: Campo[];
 }

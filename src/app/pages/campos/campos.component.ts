@@ -113,8 +113,19 @@ export class CamposComponent implements OnInit, AfterViewInit {
   }
 
   crearCampo(){
-    this.popUpManager.showLoaderAlert(this.translate.instant('CARGA.REGISTRO_CAMPO'));
+    
     const formValues = this.campoForm.value;
+    const nombreCampoNuevo = formValues.nombreCampo.trim().toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+    const existeCampo = this.datos.data.some(campo =>
+        campo.nombre.trim().toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '') === nombreCampoNuevo
+    );
+
+    if (existeCampo) {
+        this.popUpManager.showErrorAlert(this.translate.instant('ERROR.CAMPO_DUPLICADO'));
+        return;
+    }
+    this.popUpManager.showLoaderAlert(this.translate.instant('CARGA.REGISTRO_CAMPO'));
     const fechaActual = new Date().toISOString(); 
 
     const campo = {

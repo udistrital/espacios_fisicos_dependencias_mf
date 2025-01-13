@@ -69,11 +69,11 @@ export class EditarEspacioDialogComponent implements OnInit {
     this.editarForm = new FormGroup({
       nombre: new FormControl<string | null>("", {
         nonNullable: false,
-        validators: [Validators.required]
+        validators: [Validators.required, Validators.pattern(/^\S.*$/)]
       }),
       codigo_abreviacion: new FormControl<string | null>("", {
         nonNullable: true,
-        validators: [Validators.required]
+        validators: [Validators.required, Validators.pattern(/^\S.*$/)]
       }),
       dependencia_padre: new FormControl<Desplegables | null>(null, {
         nonNullable: true,
@@ -81,7 +81,7 @@ export class EditarEspacioDialogComponent implements OnInit {
       }),
       descripcion: new FormControl<string | null>("", {
         nonNullable: true,
-        validators: [Validators.required],
+        validators: [Validators.required, Validators.pattern(/^\S.*$/)],
       }),
       tipo_espacio_fisico: new FormControl<Desplegables | null>(null, {
         nonNullable: true,
@@ -91,8 +91,8 @@ export class EditarEspacioDialogComponent implements OnInit {
         nonNullable: true,
         validators: [Validators.required],
       }),
-      tipo_edificacion: new FormControl<string | null>("", {}),
-      tipo_terreno: new FormControl<string | null>("", {}),
+      tipo_edificacion: new FormControl<number | null>(0, {validators: Validators.min(0)}),
+      tipo_terreno: new FormControl<number | null>(0, {validators: Validators.min(0)}),
       camposDinamicos: new FormArray([]),
     });
   }
@@ -112,8 +112,8 @@ export class EditarEspacioDialogComponent implements OnInit {
           this.editarForm.get('tipo_uso')?.setValue(tipoUsoPreseleccionado);
           this.nombreTipoUso = tipoUsoPreseleccionado ? tipoUsoPreseleccionado.nombre : null;
   
-          this.editarForm.get('tipo_edificacion')?.setValue(this.element.tipoEdificacion || '');
-          this.editarForm.get('tipo_terreno')?.setValue(this.element.tipoTerreno || '');
+          this.editarForm.get('tipo_edificacion')?.setValue(this.element.tipoEdificacion || 0);
+          this.editarForm.get('tipo_terreno')?.setValue(this.element.tipoTerreno || 0);
           this.cdr.detectChanges();
         }else{
           this.nombreDependencia = this.element.dependenciaPadre.nombre;
@@ -183,8 +183,9 @@ export class EditarEspacioDialogComponent implements OnInit {
                     nombre_campo: new FormControl(item.CampoId.Nombre, Validators.required),
                     descripcion: new FormControl(item.CampoId.Descripcion, Validators.required),
                     codigo_abreviacion: new FormControl(item.CampoId.CodigoAbreviacion),
-                    valor: new FormControl(item.Valor, Validators.required),
+                    valor: new FormControl(item.Valor, [Validators.required, Validators.pattern(/^\S.*$/)]),
                     existente: new FormControl(true),
+                    idCampoOriginal: new FormControl(item.CampoId.Id)
                 });
                 this.camposDinamicos.push(nuevoCampo);
             }
@@ -196,7 +197,7 @@ export class EditarEspacioDialogComponent implements OnInit {
   agregarCampoExistente(campo: Campo) {
     const existeCampo = this.camposDinamicos.controls.some((control: AbstractControl) => {
       const formGroup = control as FormGroup;
-      return formGroup.get('idCampo')?.value === campo.idCampo;
+      return formGroup.get('idCampoOriginal')?.value === campo.idCampo || formGroup.get('idCampo')?.value === campo.idCampo;
     });
     if (existeCampo) {
       this.popUpManager.showErrorAlert('El campo ya existe en este espacio físico.');
@@ -207,7 +208,7 @@ export class EditarEspacioDialogComponent implements OnInit {
       nombre_campo: new FormControl({ value: campo.nombreCampo, disabled: true }),
       descripcion: new FormControl({ value: campo.descripcion, disabled: true }),
       codigo_abreviacion: new FormControl({ value: campo.codigoAbreviacion, disabled: true }),
-      valor: new FormControl('', Validators.required),
+      valor: new FormControl('', [Validators.required, Validators.pattern(/^\S.*$/)]),
       existente: new FormControl(false),
     });
     this.camposDinamicos.push(campoNoEditable);
@@ -215,7 +216,7 @@ export class EditarEspacioDialogComponent implements OnInit {
   }
 
   cargarCamposExistentes() {
-    this.oikosService.get('campo?limit=-1').subscribe((res: any) => {
+    this.oikosService.get('campo?limit=-1&query=Activo:true').subscribe((res: any) => {
       if (res && res.length > 0) {
         this.camposExistentes = res.map((campo: any) => ({
           idCampo: campo.Id,
@@ -253,7 +254,7 @@ export class EditarEspacioDialogComponent implements OnInit {
     const formValues = this.editarForm.value;
     const camposDinamicos = this.camposDinamicos.controls.map(campo => ({
       IdCampo: campo.get('idCampo')?.value,
-      Valor: campo.get('valor')?.value,
+      Valor: campo.get('valor')?.value.toUpperCase(),
       Existente: campo.get('existente')?.value
     }));
     const camposExistentes = camposDinamicos.filter(campo => campo.Existente === true);
@@ -263,9 +264,9 @@ export class EditarEspacioDialogComponent implements OnInit {
       TipoEspacioId: formValues.tipo_espacio_fisico.id,
       TipoUsoId: formValues.tipo_uso.id,
       DependenciaId: formValues.dependencia_padre.id,
-      Nombre: formValues.nombre,
+      Nombre: formValues.nombre.toUpperCase(),
       Descripcion: formValues.descripcion,
-      CodAbreviacion: formValues.codigo_abreviacion,
+      CodAbreviacion: formValues.codigo_abreviacion.toUpperCase(),
       TipoEdificacion: formValues.tipo_edificacion,
       TipoTerreno: formValues.tipo_terreno,
       CamposExistentes: camposExistentes,

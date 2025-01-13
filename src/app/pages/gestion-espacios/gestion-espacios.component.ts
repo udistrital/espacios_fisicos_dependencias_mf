@@ -212,13 +212,14 @@ export class GestionEspaciosComponent implements OnInit, AfterViewInit {
     return this.oikosService.post("espacio_fisico/buscar_espacio_fisico", busqueda).pipe(
       map((res: any) => {
         if (res && res.length > 0) {
+          console.log(res)
           return res.map((item: any) => ({
             id: item.EspacioFisico.Id,
             nombre: item.EspacioFisico.Nombre,
             cod_abreviacion: item.EspacioFisico.CodigoAbreviacion,
             descripcion: item.EspacioFisico.Descripcion,
-            tipoEdificacion: "",
-            tipoTerreno: "",
+            tipoEdificacion: item.EspacioFisico.TipoEdificacionId,
+            tipoTerreno: item.EspacioFisico.TipoTerrenoId,
             tipoEspacio: item.EspacioFisico.TipoEspacioFisicoId ? {
               id: item.EspacioFisico.TipoEspacioFisicoId.Id,
               nombre: item.EspacioFisico.TipoEspacioFisicoId.Nombre
