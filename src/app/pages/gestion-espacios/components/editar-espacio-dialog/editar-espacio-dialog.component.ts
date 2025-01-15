@@ -102,12 +102,9 @@ export class EditarEspacioDialogComponent implements OnInit {
       if (this.element) {
         if(this.element.gestion){
           this.asignarDependencia(this.element.id);
-          console.log("AAAAAAAAAAAAAA")
-          console.log(this.tipo_espacio_fisico)
           const tipoEspacioPreseleccionado = this.tipo_espacio_fisico.find(espacio => espacio.id === this.element.tipoEspacio?.id) || null;
           this.editarForm.get('tipo_espacio_fisico')?.setValue(tipoEspacioPreseleccionado);
           this.nombreTipoEspacio = tipoEspacioPreseleccionado ? tipoEspacioPreseleccionado.nombre : null;
-          console.log(tipoEspacioPreseleccionado)
           const tipoUsoPreseleccionado = this.tipo_uso.find(uso => uso.id === this.element.tipoUso?.id) || null;
           this.editarForm.get('tipo_uso')?.setValue(tipoUsoPreseleccionado);
           this.nombreTipoUso = tipoUsoPreseleccionado ? tipoUsoPreseleccionado.nombre : null;
@@ -212,7 +209,6 @@ export class EditarEspacioDialogComponent implements OnInit {
       existente: new FormControl(false),
     });
     this.camposDinamicos.push(campoNoEditable);
-    console.log(campoNoEditable.get("idCampo")?.value)
   }
 
   cargarCamposExistentes() {
@@ -276,29 +272,37 @@ export class EditarEspacioDialogComponent implements OnInit {
 
   @Output() espacioActualizado = new EventEmitter<void>();
 
-  editarEspacio(){
-    this.popUpManager.showConfirmAlert(this.translate.instant('CONFIRMACION.EDITAR.PREGUNTA'),this.translate.instant('CONFIRMACION.EDITAR.CONFIRMAR'),this.translate.instant('CONFIRMACION.EDITAR.DENEGAR')).then((result) =>{
-      if (result === true){
+  editarEspacio() {
+    this.popUpManager.showConfirmAlert(
+      this.translate.instant('CONFIRMACION.EDITAR.PREGUNTA'),
+      this.translate.instant('CONFIRMACION.EDITAR.CONFIRMAR'),
+      this.translate.instant('CONFIRMACION.EDITAR.DENEGAR')
+    ).then((result) => {
+      if (result === true) {
         this.popUpManager.showLoaderAlert(this.translate.instant('CARGA.EDITAR'));
         const editar = this.construirEdicion();
-        console.log(editar);
         this.oikosMidService.post("EditarEspacioFisico", editar).pipe(
           tap((res: any) => {
-              if (res.Success) {
-                  this.popUpManager.showSuccessAlert(this.translate.instant('EXITO.EDITAR'));
-                  this.espacioActualizado.emit();
-              } else {
-                  this.popUpManager.showErrorAlert(this.translate.instant('ERROR.EDITAR'));
-              }
+            if (res.Success) {
+              this.popUpManager.showSuccessAlert(this.translate.instant('EXITO.EDITAR'), () => {
+                this.espacioActualizado.emit();  
+                this.dialogRef.close({success:true, 
+                                      nombre: editar.Nombre,
+                                      tipo_uso: editar.TipoUsoId,
+                                      dependencia: editar.DependenciaId,
+                                      tipo_espacio: editar.TipoEspacioId});  
+              });
+            } else {
+              this.popUpManager.showErrorAlert(this.translate.instant('ERROR.EDITAR'));
+            }
           }),
           catchError((error) => {
-              console.error('Error en la solicitud:', error);
-              this.popUpManager.showErrorAlert(this.translate.instant('ERROR.EDITAR') +": " + (error.message || this.translate.instant('ERROR.DESCONOCIDO')));
-              return of(null); 
+            console.error('Error en la solicitud:', error);
+            this.popUpManager.showErrorAlert(this.translate.instant('ERROR.EDITAR') + ": " + (error.message || this.translate.instant('ERROR.DESCONOCIDO')));
+            return of(null); 
           })
         ).subscribe();
-        this.dialogRef.close();
       }
-    })
+    });
   }
 }
