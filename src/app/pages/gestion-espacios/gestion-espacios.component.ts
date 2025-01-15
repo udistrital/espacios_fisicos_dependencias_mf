@@ -107,14 +107,6 @@ export class GestionEspaciosComponent implements OnInit, AfterViewInit {
     });
   }
 
-  // buscarEspacios() {
-  //   this.datos = new MatTableDataSource<BusquedaGestion>(this.elementosBusqueda);
-  //   setTimeout(() => { this.datos.paginator = this.paginator; }, 1000);
-  //   this.popUpManager.showSuccessAlert(this.translate.instant('EXITO.BUSQUEDA'));
-  //   this.mostrarTabla = true;
-  //   console.log(this.datos);
-  // }
-
   abrirDialogDetallesEditarEspacio(tipo: string, element:BusquedaGestion){
     const datos: EditarDetalles = {} as EditarDetalles;
     datos.id = element.id;
@@ -141,6 +133,39 @@ export class GestionEspaciosComponent implements OnInit, AfterViewInit {
         tipo_espacio_fisico: this.tipo_espacio_fisico
       }
     });
+
+    dialogRef.afterClosed().subscribe(result =>{
+      if (result?.success) {
+        if (this.gestionForm.value.nombre){
+          if (result.nombre != datos.nombre){
+            this.gestionForm.get('nombre')?.setValue(result.nombre);
+          }
+        }
+
+        if (this.gestionForm.value.tipoUso?.id){
+          if (result.tipo_uso != datos.tipoUso.id){
+            const tipoUsoCambiado = this.tipo_uso.find(uso => uso.id === result.tipo_uso) || null;
+            this.gestionForm.get('tipoUso')?.setValue(tipoUsoCambiado);
+          }
+        }
+
+        if (this.gestionForm.value.dependencia?.id){
+          if (result.dependencia != datos.dependenciaPadre.id){
+            const dependenciaCambio = this.dependencias.find(dependencia => dependencia.id === result.dependencia) || null;
+            this.gestionForm.get('dependencia')?.setValue(dependenciaCambio);
+          }
+        }
+
+        if (this.gestionForm.value.tipoEspacio?.id){
+          if (result.tipo_espacio != datos.tipoEspacio.id){
+            const tipoEspacioCambio = this.tipo_espacio_fisico.find(tipo_espacio => tipo_espacio.id === result.tipo_espacio) || null;
+            this.gestionForm.get('tipoEspacio')?.setValue(tipoEspacioCambio);
+          }
+        }
+
+        this.buscarEspacios();
+      }
+    })
   }
 
   construirBusqueda() {
@@ -212,7 +237,6 @@ export class GestionEspaciosComponent implements OnInit, AfterViewInit {
     return this.oikosService.post("espacio_fisico/buscar_espacio_fisico", busqueda).pipe(
       map((res: any) => {
         if (res && res.length > 0) {
-          console.log(res)
           return res.map((item: any) => ({
             id: item.EspacioFisico.Id,
             nombre: item.EspacioFisico.Nombre,
@@ -224,13 +248,21 @@ export class GestionEspaciosComponent implements OnInit, AfterViewInit {
               id: item.EspacioFisico.TipoEspacioFisicoId.Id,
               nombre: item.EspacioFisico.TipoEspacioFisicoId.Nombre
             }: null,
-            tipoUso: item.TiposUso[0] ? {
-              id: item.TiposUso[0].TipoUsoId.Id,
-              nombre: item.TiposUso[0].TipoUsoId.Nombre
-            }: {
-              id: null,
-              nombre: 'NO APLICA'
-            },
+            tipoUso: (() => {
+              const tipoActivo = item.TiposUso.filter((t: any) => t.Activo === true);
+              if (tipoActivo.length > 0) {
+                const activo = tipoActivo[0];
+                return {
+                  id: activo.TipoUsoId.Id,
+                  nombre: activo.TipoUsoId.Nombre
+                };
+              } else {
+                return {
+                  id: null,
+                  nombre: 'NO APLICA'
+                };
+              }
+            })(),
             estado: item.EspacioFisico.Activo ? 'ACTIVA' : 'NO ACTIVA',
           }));
         } else {
@@ -274,15 +306,16 @@ export class GestionEspaciosComponent implements OnInit, AfterViewInit {
     this.popUpManager.showLoaderAlert(this.translate.instant('CARGA.ACTIVAR'));
     try {
       const response: any = await this.oikosMidService.put("ActivarEspacioFisico", element).toPromise();
-      console.log(response)
       if (response) {
         Swal.close();
-        this.popUpManager.showSuccessAlert(this.translate.instant('EXITO.ACTIVAR'));
+        this.popUpManager.showSuccessAlert(this.translate.instant('EXITO.ACTIVAR'),
+          () =>{
+            const busqueda = this.construirBusqueda();
+            this.busqueda(busqueda).subscribe((resultados) => {
+              this.procesarResultados(resultados);
+            });
+          });
 
-        const busqueda = this.construirBusqueda();
-        this.busqueda(busqueda).subscribe((resultados) => {
-          this.procesarResultados(resultados);
-        });
       } else {
         Swal.close();
         this.popUpManager.showErrorAlert(this.translate.instant('ERROR.ACTIVAR'));
@@ -300,11 +333,12 @@ export class GestionEspaciosComponent implements OnInit, AfterViewInit {
       const response: any = await this.oikosMidService.put("DesactivarEspacioFisico", element).toPromise();
       if (response) {
         Swal.close();
-        this.popUpManager.showSuccessAlert(this.translate.instant('EXITO.DESACTIVAR'));
-
-        const busqueda = this.construirBusqueda();
-        this.busqueda(busqueda).subscribe((resultados) => {
-          this.procesarResultados(resultados);
+        this.popUpManager.showSuccessAlert(this.translate.instant('EXITO.DESACTIVAR'),
+        () =>{
+          const busqueda = this.construirBusqueda();
+          this.busqueda(busqueda).subscribe((resultados) => {
+            this.procesarResultados(resultados);
+          });
         });
       } else {
         Swal.close();
