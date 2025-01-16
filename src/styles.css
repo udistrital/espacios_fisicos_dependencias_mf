@@ -6,7 +6,7 @@
     align-items: baseline;
     box-sizing: border-box;
     width: 100%;
-    font-family: Helvetica, sans-serif;;
+    font-family: Helvetica, sans-serif;
     font-weight: bold;
     font-size: 13px;
 }
@@ -19,7 +19,7 @@
     background-color: green;
     color: white;
     padding: 0.2rem 2rem;
-    font-family: Helvetica, sans-serif;;
+    font-family: Helvetica, sans-serif;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     border-radius: 5px;
     border: none;
@@ -83,7 +83,7 @@
 }
 
 .tooltip {
-    font-family: Helvetica, sans-serif;;
+    font-family: Helvetica, sans-serif;
     width: max-content;
     background-color: #FFF2CC;
     border: 1px solid #D6B656;
@@ -129,7 +129,7 @@ input[formControlName="nombre"] {
 
 .boton-ayuda {
     position: relative;
-    font-family: Helvetica, sans-serif;;
+    font-family: Helvetica, sans-serif;
     width: 15px;
     height: 15px;
     border-radius: 50%;
@@ -157,7 +157,7 @@ input, select, textarea{
     width: 100%;
     border-radius: 5px;
     border: 1px solid;
-    font-family: Helvetica, sans-serif;;
+    font-family: Helvetica, sans-serif;
     font-size: 14px;
     padding: 3px;
     box-sizing: border-box;
