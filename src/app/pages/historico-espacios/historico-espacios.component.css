@@ -107,8 +107,6 @@
     border: 1px solid #000; 
     position: relative;
     overflow: visible;
-    position: relative;
-    overflow: visible;
 }
 
 .contenido-celda {
@@ -142,11 +140,6 @@ th.mat-sort-header-sorted {
 .boton-acciones:hover .tooltip{
     visibility: visible;
     opacity: 1;
-}
-
-
-.tooltip-bottom {
-    z-index: 1000;
 }
 
 .column {

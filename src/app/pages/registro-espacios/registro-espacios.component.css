@@ -59,7 +59,6 @@ input, mat-select, select {
     text-align: left; 
     padding: 10px;
     box-sizing: border-box;
-    height: 60px;
 }
 
 .espacio-nombre {
@@ -88,17 +87,20 @@ input[formControlName="valor"], input[formControlName="codigo_abreviacion"]{
 }
 
 .boton-accion {
+    margin-left: 0px;
+    padding-left: 20%;
+    padding-right: 20%;
     transition: background-color 0.3s ease;
-  }
+}
   
-  .btn-enabled {
+.btn-enabled {
     cursor: pointer;
-  }
-  
-  .btn-disabled {
+}
+
+.btn-disabled {
     background-color: #b3b3b3; 
     cursor: not-allowed;
-  }
+}
 
 .form-group {
     position: relative;
@@ -120,12 +122,6 @@ input[formControlName="valor"], input[formControlName="codigo_abreviacion"]{
     line-height: 0.8; 
     background: none; 
     border: none; 
-}
-
-.boton-accion{
-    margin-left: 0px;
-    padding-left: 20%;
-    padding-right: 20%;
 }
 
 .icono-rojo{

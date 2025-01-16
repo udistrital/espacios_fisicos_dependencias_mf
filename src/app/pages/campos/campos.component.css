@@ -148,11 +148,6 @@ input[formControlName="cod_abreviacion"] {
     opacity: 1;
 }
 
-
-.tooltip-bottom {
-    z-index: 1000;
-}
-
 .column {
     margin-top: 5px;
 }
