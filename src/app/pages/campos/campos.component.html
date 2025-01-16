@@ -35,7 +35,10 @@
               </form>
               <br>
               <ng-container *ngIf="mostrarTabla">
-                <table mat-table [dataSource]="datos" class="mat-elevation-z8 tabla-gestion">
+                <table mat-table [dataSource]="datos" class="mat-elevation-z8 tabla-gestion" aria-label="Tabla de campos" aria-describedby="descripcionTabla">
+                  <span id="descripcionTabla" class="visually-hidden">
+                    Tabla de campos, que muestra los datos de cada campo.
+                  </span>
                   <ng-container matColumnDef="NOMBRE">
                     <th mat-header-cell *matHeaderCellDef class="titulo-tabla">{{ "TABLA_CAMPO.NOMBRE" | translate }}</th>
                     <td mat-cell *matCellDef="let element" class="contenido-celda">{{ element.nombre }}</td>
