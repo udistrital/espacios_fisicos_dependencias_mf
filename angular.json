@@ -80,7 +80,7 @@
               "sourceMap": true,
               "namedChunks": true,
               "outputHashing": "none",
-              "deployUrl": "http://localhost:4204/"
+              "deployUrl": "http://localhost:4206/"
             }
           },
           "defaultConfiguration": "local"
