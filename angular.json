@@ -54,7 +54,7 @@
                   "with": "src/environments/environment.production.ts"
                 }
               ],
-              "deployUrl": "https://oikosgestiondependencias.portaloas.udistrital.edu.co/"
+              "deployUrl": "https://oikosespaciosfisicos.portaloas.udistrital.edu.co/"
             },
             "development": {
               "optimization": true,
@@ -70,7 +70,7 @@
                   "with": "src/environments/environment.development.ts"
                 }
               ],
-              "deployUrl": "https://pruebasoikosgestiondependencias.portaloas.udistrital.edu.co/"
+              "deployUrl": "https://pruebasoikosespaciosfisicos.portaloas.udistrital.edu.co/"
             },
             "local": {
               "buildOptimizer": false,
