@@ -1,5 +1,5 @@
 export const environment = {
-    production:true,
+    production:false,
     apiUrl: "https://oikosespaciosfisicos.portaloas.udistrital.edu.co/",
     OIKOS_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/oikos_crud_api/v2/',
     OIKOS_MID: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/espacios_fisicos_mid/v1/',
