@@ -5,7 +5,7 @@
     display: flex;
     margin-left: 20px;
     height: 100%;   
-    font-family: Helvetica;
+    font-family: Helvetica, sans-serif;
     margin-right: 16px;
     flex-grow: 1;
 }
@@ -25,7 +25,7 @@
     justify-content: center;
     align-items: center;
     height: 100%;   
-    font-family: Helvetica;
+    font-family: Helvetica, sans-serif;
 }
 
 .boton-organigrama{
@@ -60,7 +60,7 @@
 .contenido-gestion p {
     font-size: 12px; 
     margin: 0;
-    font-family: 'Helvetica';
+    font-family: 'Helvetica', sans-serif;
     padding-bottom: 4px;
     font-style: italic;
     color: gray;
@@ -97,7 +97,7 @@
     text-align: center;
     border: 1px solid #000; 
     font-weight: bold;
-    font-family: Helvetica
+    font-family: Helvetica, sans-serif;
 }
 
 
@@ -107,12 +107,10 @@
     border: 1px solid #000; 
     position: relative;
     overflow: visible;
-    position: relative;
-    overflow: visible;
 }
 
 .contenido-celda {
-    font-family: Helvetica
+    font-family: Helvetica, sans-serif;
 }
 
 
@@ -142,11 +140,6 @@ th.mat-sort-header-sorted {
 .boton-acciones:hover .tooltip{
     visibility: visible;
     opacity: 1;
-}
-
-
-.tooltip-bottom {
-    z-index: 1000;
 }
 
 .column {
@@ -179,7 +172,7 @@ input, mat-select, select {
     font-size: 14px;
     border-radius: 5px;
     border: 1px solid;
-    font-family: Helvetica;
+    font-family: Helvetica, sans-serif;
     padding-left: 5px;
     margin-top: 3px;
 }

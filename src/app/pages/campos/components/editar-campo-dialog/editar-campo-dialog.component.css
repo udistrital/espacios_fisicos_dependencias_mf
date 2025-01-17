@@ -9,7 +9,7 @@
     color: #8C1A18;
     padding: 10px;
     text-align: center;
-    font-family: Helvetica;
+    font-family: Helvetica, sans-serif;
     flex: 1;
     display: flex;
     justify-content: center;
@@ -48,16 +48,12 @@ input[formControlName="cod_abreviacion"] {
     align-items: center;
     align-self: center;
     width: 70%;
+    display: inline-block; 
+    transition: background-color 0.3s ease;
 }
 
 .contenedor-boton-accion {
     text-align: center; 
-}
-
-.boton-accion {
-    display: inline-block; 
-    padding-right: 10%;
-    padding-left: 10%;
 }
 
 .input-centrado {
@@ -114,6 +110,7 @@ input[formControlName="cod_abreviacion"] {
 
 .nombre-campo {
     width: 40%; 
+    
 }
 
 .campo{
@@ -131,10 +128,6 @@ input[formControlName="cod_abreviacion"] {
 .error {
     color: red;
     font-size: 12px;
-}
-
-.nombre-campo {
-    width: 40%; 
 }
 
 .descripcion-campo {
@@ -171,19 +164,15 @@ input[formControlName="cod_abreviacion"] {
     height: auto;
     cursor: pointer;
 }
-
-.boton-accion {
-    transition: background-color 0.3s ease;
-  }
   
-  .btn-enabled {
+.btn-enabled {
     cursor: pointer;
-  }
-  
-  .btn-disabled {
+}
+
+.btn-disabled {
     background-color: #b3b3b3; 
     cursor: not-allowed;
-  }
+}
 
 input, 
 textarea {
