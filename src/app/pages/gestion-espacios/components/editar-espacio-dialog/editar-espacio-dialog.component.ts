@@ -256,7 +256,6 @@ export class EditarEspacioDialogComponent implements OnInit {
     const camposExistentes = camposDinamicos.filter(campo => campo.Existente === true);
     const camposNoExistentes = camposDinamicos.filter(campo => campo.Existente === false);
     return {
-      Id: this.element.id,
       EspacioId: this.element.id,
       TipoEspacioId: formValues.tipo_espacio_fisico.id,
       TipoUsoId: formValues.tipo_uso.id,
@@ -282,7 +281,7 @@ export class EditarEspacioDialogComponent implements OnInit {
       if (result === true) {
         this.popUpManager.showLoaderAlert(this.translate.instant('CARGA.EDITAR'));
         const editar = this.construirEdicion();
-        this.oikosMidService.put("EditarEspacioFisico", editar).pipe(
+        this.oikosMidService.post("EditarEspacioFisico", editar).pipe(
           tap((res: any) => {
             if (res.Success) {
               this.popUpManager.showSuccessAlert(this.translate.instant('EXITO.EDITAR'), () => {
