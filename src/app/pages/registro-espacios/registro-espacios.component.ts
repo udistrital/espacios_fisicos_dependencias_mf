@@ -13,7 +13,7 @@ import { of } from 'rxjs';
 // @ts-ignore
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { SeleccionarCampoDialogComponent } from '../gestion-espacios/components/editar-espacio-dialog/seleccionar-campo-dialog/seleccionar-campo-dialog.component';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registro-espacios',
@@ -39,6 +39,7 @@ export class RegistroEspaciosComponent implements OnInit {
     public oikosService: OikosService,
     public dialog: MatDialog,
     public oikosMidService: OikosMidService,
+    private router: Router
   ) {
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {});
     this.cargarTiposEspacioFisico();
@@ -152,7 +153,8 @@ export class RegistroEspaciosComponent implements OnInit {
           tap((res: any) => {
               if (res.Success) {
                   Swal.close();
-                  this.popUpManager.showSuccessAlert(this.translate.instant('EXITO.REGISTRAR'));
+                  this.popUpManager.showSuccessAlert(this.translate.instant('EXITO.REGISTRAR'),
+                  () =>  this.router.navigate(["gestion-espacios"], { queryParams: { nombre:  this.registroForm.value.nombre.toUpperCase()} }));
               } else {
                   Swal.close();
                   this.popUpManager.showErrorAlert(this.translate.instant('ERROR.REGISTRAR'));
