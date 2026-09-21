@@ -15,6 +15,7 @@ import { catchError, tap, map } from 'rxjs/operators';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { EditarDetalles } from 'src/app/models/editarDetalles.models';
 import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-gestion-espacios',
@@ -40,6 +41,7 @@ export class GestionEspaciosComponent implements OnInit, AfterViewInit {
     public dialog: MatDialog,
     public oikosService: OikosService,
     public oikosMidService: OikosMidService,
+    private route: ActivatedRoute,
   ){
     translate.setDefaultLang('es');
     this.cargarTiposEspacioFisico();
@@ -105,6 +107,11 @@ export class GestionEspaciosComponent implements OnInit, AfterViewInit {
         validators: [Validators.required]
       }),
     });
+    this.route.queryParams.subscribe(params =>{
+      if (params["nombre"]){
+        this.gestionForm.get('nombre')?.setValue(params["nombre"]);
+      }
+    })
   }
 
   abrirDialogDetallesEditarEspacio(tipo: string, element:BusquedaGestion){
